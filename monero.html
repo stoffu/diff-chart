@@ -28,7 +28,8 @@ var chart = AmCharts.makeChart("chartdiv", {
     "valueAxes": [{
         "axisAlpha": 0.2,
         "dashLength": 1,
-        "position": "left"
+        "position": "left",
+        "logarithmic": true
     }],
     "mouseWheelZoomEnabled": true,
     "graphs": [{
@@ -74,10 +75,16 @@ function zoomChart() {
     chart.zoomToIndexes(chartData.length - 40, chartData.length - 1);
 }
 
+function toggleLogScale() {
+  chart.valueAxes[0].logarithmic = document.getElementById("log_scale").checked;
+  chart.validateNow();
+}
+
 </script>
 </header>
 <body>
 <h1>Monero difficulty chart</h1>
 <div id="chartdiv"></div>
+<p><input type="checkbox" id="log_scale" onclick="toggleLogScale()" checked>Log scale</p>
 </body>
 </html>
