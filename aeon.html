@@ -73,7 +73,7 @@ var chart = AmCharts.makeChart("chartdiv", {
     },
     "chartCursor": {
        "limitToGraph":"g1",
-       "pan": true
+       "pan": false
     },
     "categoryField": "height",
     "categoryAxis": {
@@ -101,11 +101,16 @@ function toggleLogScale() {
   chart.validateNow();
 }
 
+function togglePan() {
+  chart.chartCursor.pan = document.getElementById("pan").checked;
+}
+
 </script>
 </header>
 <body>
 <h1>Aeon difficulty chart</h1>
 <div id="chartdiv"></div>
 <p><input type="checkbox" id="log_scale" onclick="toggleLogScale()" checked>Log scale</p>
+<p><input type="checkbox" id="pan" onclick="togglePan()">Enable panning</p>
 </body>
 </html>
