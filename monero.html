@@ -35,6 +35,7 @@
 <!-- Chart code -->
 <script>
 var chartData = chartData_0;
+chartData.shift();
 chartData = chartData.concat(chartData_1);
 chartData = chartData.concat(chartData_2);
 chartData = chartData.concat(chartData_3);
@@ -68,7 +69,7 @@ var chart = AmCharts.makeChart("chartdiv", {
     "mouseWheelZoomEnabled": true,
     "graphs": [{
         "id": "g1",
-        "balloonText": "[[value]]\n[[date]]",
+        "balloonText": "Diff: <b>[[value]]</b>\nHeight: <b>[[height]]</b>",
         "bullet": "round",
         "bulletBorderAlpha": 1,
         "bulletColor": "#FFFFFF",
@@ -89,9 +90,10 @@ var chart = AmCharts.makeChart("chartdiv", {
        "limitToGraph":"g1",
        "pan": false
     },
-    "categoryField": "height",
+    "categoryField": "date",
     "categoryAxis": {
-        "parseDates": false,
+        "parseDates": true,
+        "minPeriod": "ss",
         "axisColor": "#DADADA",
         "dashLength": 1,
         "minorGridEnabled": true
