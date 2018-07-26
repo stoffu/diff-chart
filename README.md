@@ -1,2 +1,3 @@
 - https://stoffu.github.io/diff-chart/aeon.html
 - https://stoffu.github.io/diff-chart/monero.html
+- https://stoffu.github.io/diff-chart/wownero.html
