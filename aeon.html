@@ -34,7 +34,7 @@ var chart = AmCharts.makeChart("chartdiv", {
     "mouseWheelZoomEnabled": true,
     "graphs": [{
         "id": "g1",
-        "balloonText": "[[value]]",
+        "balloonText": "[[value]]\n[[date]]",
         "bullet": "round",
         "bulletBorderAlpha": 1,
         "bulletColor": "#FFFFFF",
@@ -43,7 +43,7 @@ var chart = AmCharts.makeChart("chartdiv", {
         "valueField": "difficulty",
         "useLineColorForBulletBorder": true,
         "balloon":{
-            "drop":true
+            "cornerRadius": 10,
         }
     }],
     "chartScrollbar": {
@@ -52,7 +52,8 @@ var chart = AmCharts.makeChart("chartdiv", {
         "scrollbarHeight": 40
     },
     "chartCursor": {
-       "limitToGraph":"g1"
+       "limitToGraph":"g1",
+       "pan": true
     },
     "categoryField": "height",
     "categoryAxis": {
