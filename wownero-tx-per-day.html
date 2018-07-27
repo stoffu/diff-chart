@@ -1,0 +1,114 @@
+<html>
+<header><title>Wownero transactions per day</title>
+<!-- Styles -->
+<style>
+#chartdiv {
+  width : 100%;
+  height  : 500px;
+}                                 
+</style>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="wownero-data-0.js"></script>
+
+<!-- Chart code -->
+<script>
+var chartData = chartData_0;
+chartData.shift();
+
+var chartData_tpd = [];
+var last_date = "";
+var num_txes = 0;
+for (var i = 0; i < chartData.length; ++i) {
+    var block = chartData[i];
+    var block_date = block.date.substr(0, 10);
+    if (last_date === "") {
+        last_date = block_date;
+    }
+    if (Date.parse(last_date) < Date.parse(block_date) || i == chartData.length - 1) {
+        chartData_tpd.push({
+            "date": last_date,
+            "num_txes": num_txes,
+        });
+        last_date = block_date;
+        num_txes = 0;
+    } else {
+        num_txes += block.num_txes;
+    }
+}
+
+var chart = AmCharts.makeChart("chartdiv", {
+    "type": "serial",
+    "theme": "light",
+    "marginRight": 80,
+    "autoMarginOffset": 20,
+    "marginTop": 7,
+    "dataProvider": chartData_tpd,
+    "valueAxes": [{
+        "axisAlpha": 0.2,
+        "dashLength": 1,
+        "position": "left",
+    }],
+    "mouseWheelZoomEnabled": true,
+    "graphs": [{
+        "id": "g1",
+        "lineColor": "#cc99ff",
+        "balloonText": "<b>[[value]]</b>",
+        "bullet": "round",
+        "bulletBorderAlpha": 1,
+        "bulletColor": "#FFFFFF",
+        "hideBulletsCount": 50,
+        "title": "red line",
+        "valueField": "num_txes",
+        "useLineColorForBulletBorder": true,
+        "balloon":{
+            "cornerRadius": 10,
+        }
+    }],
+    "chartScrollbar": {
+        "autoGridCount": true,
+        "graph": "g1",
+        "scrollbarHeight": 40
+    },
+    "chartCursor": {
+       "limitToGraph":"g1",
+       "pan": false
+    },
+    "categoryField": "date",
+    "categoryAxis": {
+        "parseDates": true,
+        "axisColor": "#DADADA",
+        "dashLength": 1,
+        "minorGridEnabled": true
+    },
+    "export": {
+        "enabled": true
+    }
+});
+
+chart.addListener("rendered", zoomChart);
+zoomChart();
+
+// this method is called when chart is first inited as we listen for "rendered" event
+function zoomChart() {
+    // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
+    chart.zoomToIndexes(0, chartData.length - 1);
+}
+
+function togglePan() {
+  chart.chartCursor.pan = document.getElementById("pan").checked;
+}
+
+</script>
+</header>
+<body>
+<h1>Wownero transactions per day</h1>
+<div id="chartdiv"></div>
+<p><input type="checkbox" id="pan" onclick="togglePan()">Enable panning</p>
+</body>
+</html>

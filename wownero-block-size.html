@@ -1,0 +1,107 @@
+<html>
+<header><title>Wownero block size</title>
+<!-- Styles -->
+<style>
+#chartdiv {
+  width : 100%;
+  height  : 500px;
+}                                 
+</style>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="wownero-data-0.js"></script>
+
+<!-- Chart code -->
+<script>
+var chartData = chartData_0;
+chartData.shift();
+
+// https://stackoverflow.com/a/18650828
+function formatBytes(bytes, decimal) {
+    if (0 == bytes)
+        return "0 bytes";
+    var c = 1024;
+    var d = decimal || 2;
+    var e = ["bytes", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+    var f = Math.floor(Math.log(bytes) / Math.log(c));
+    return "<b>" + parseFloat((bytes / Math.pow(c, f)).toFixed(d)) + "</b> " + e[f]
+}
+
+for (var i = 0; i < chartData.length; ++i) {
+    chartData[i].block_size_str = formatBytes(chartData[i].block_size, 3);
+}
+
+var chart = AmCharts.makeChart("chartdiv", {
+    "type": "serial",
+    "theme": "light",
+    "marginRight": 80,
+    "autoMarginOffset": 20,
+    "marginTop": 7,
+    "dataProvider": chartData,
+    "valueAxes": [{
+        "axisAlpha": 0,
+    }],
+    "mouseWheelZoomEnabled": true,
+    "graphs": [{
+        "id": "g1",
+        "lineColor": "#9bc408",
+        "balloonText": "Size: [[block_size_str]]\nHeight: <b>[[height]]</b>",
+        "bullet": "round",
+        "bulletBorderAlpha": 1,
+        "bulletColor": "#FFFFFF",
+        "hideBulletsCount": 50,
+        "title": "block size",
+        "valueField": "block_size",
+        "useLineColorForBulletBorder": true,
+        "balloon":{
+            "cornerRadius": 10,
+        }
+    }],
+    "chartScrollbar": {
+        "autoGridCount": true,
+        "graph": "g1",
+        "scrollbarHeight": 40
+    },
+    "chartCursor": {
+       "pan": false
+    },
+    "categoryField": "date",
+    "categoryAxis": {
+        "parseDates": true,
+        "minPeriod": "ss",
+        "axisColor": "#DADADA",
+        "dashLength": 1,
+        "minorGridEnabled": true
+    },
+    "export": {
+        "enabled": true,
+        "position": "bottom-right"
+    }
+});
+
+chart.addListener("rendered", zoomChart);
+zoomChart();
+
+// this method is called when chart is first inited as we listen for "rendered" event
+function zoomChart() {
+    // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
+    chart.zoomToIndexes(0, chartData.length - 1);
+}
+
+function togglePan() {
+  chart.chartCursor.pan = document.getElementById("pan").checked;
+}
+
+</script>
+</header>
+<body>
+<h1>Wownero block size</h1>
+<div id="chartdiv"></div>
+<p><input type="checkbox" id="pan" onclick="togglePan()">Enable panning</p>
+</body>
+</html>
