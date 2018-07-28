@@ -1,4 +1,6 @@
-# Aeon charts
+# Aeon / Monero / Wownero charts
+
+## Aeon
 
 - [Difficulty](https://stoffu.github.io/diff-chart/aeon.html)
 - [Transactions per day](https://stoffu.github.io/diff-chart/aeon-tx-per-day.html)
@@ -6,7 +8,7 @@
 - [Block reward](https://stoffu.github.io/diff-chart/aeon-block-reward.html)
 - [Coin supply](https://stoffu.github.io/diff-chart/aeon-coin-supply.html)
 
-# Monero charts
+## Monero
 
 - [Difficulty](https://stoffu.github.io/diff-chart/monero.html)
 - [Transactions per day](https://stoffu.github.io/diff-chart/monero-tx-per-day.html)
@@ -14,7 +16,7 @@
 - [Block reward](https://stoffu.github.io/diff-chart/monero-block-reward.html)
 - [Coin supply](https://stoffu.github.io/diff-chart/monero-coin-supply.html)
 
-# Wownero charts
+## Wownero
 
 - [Difficulty](https://stoffu.github.io/diff-chart/wownero.html)
 - [Transactions per day](https://stoffu.github.io/diff-chart/wownero-tx-per-day.html)
