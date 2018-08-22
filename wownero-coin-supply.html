@@ -23,7 +23,9 @@ chartData.shift();
 
 var coin_supply = 0;
 for (var i = 0; i < chartData.length; ++i) {
-    coin_supply += chartData[i].reward;
+    chartData[i].date = new Date(1000 * chartData[i][0]);
+    chartData[i].height = i + 1;
+    coin_supply += chartData[i][2];
     chartData[i].coin_supply = coin_supply;
 }
 

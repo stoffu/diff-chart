@@ -22,15 +22,17 @@ var chartData = chartData_0;
 chartData.shift();
 
 var chartData_tpd = [];
-var last_date = "";
+var last_date = null;
 var num_txes = 0;
 for (var i = 0; i < chartData.length; ++i) {
-    var block = chartData[i];
-    var block_date = block.date.substr(0, 10);
-    if (last_date === "") {
+    var block_date = new Date(1000 * chartData[i][0]);
+    block_date.setHours(0);
+    block_date.setMinutes(0);
+    block_date.setSeconds(0);
+    if (last_date === null) {
         last_date = block_date;
     }
-    if (Date.parse(last_date) < Date.parse(block_date) || i == chartData.length - 1) {
+    if (last_date < block_date || i == chartData.length - 1) {
         chartData_tpd.push({
             "date": last_date,
             "num_txes": num_txes,
@@ -38,7 +40,7 @@ for (var i = 0; i < chartData.length; ++i) {
         last_date = block_date;
         num_txes = 0;
     } else {
-        num_txes += block.num_txes;
+        num_txes += chartData[i][4].length;
     }
 }
 

@@ -30,19 +30,22 @@ import requests
 import json
 
 class JSONRPC(object):
-    def __init__(self, url):
-        self.url = url
+    def __init__(self, protocol, host, port):
+        self.protocol = protocol
+        self.host = host
+        self.port = port
 
-    def send_request(self, inputs):
+    def send_request(self, path, inputs):
+        url = '{protocol}://{host}:{port}{path}'.format(protocol=self.protocol, host=self.host, port=self.port, path=path)
         res = requests.post(
-            self.url,
+            url,
             data=json.dumps(inputs),
             headers={'content-type': 'application/json'})
         res = res.json()
         
         assert 'error' not in res, res
 
-        return res['result']
+        return res['result'] if path == '/json_rpc' else res
 
 
 
