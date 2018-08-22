@@ -39,6 +39,12 @@ chartData = chartData.concat(chartData_7);
 chartData = chartData.concat(chartData_8);
 chartData = chartData.concat(chartData_9);
 
+for (var i = 0; i < chartData.length; ++i) {
+    chartData[i].date = new Date(1000 * chartData[i][0]);
+    chartData[i].height = i + 1;
+    chartData[i].reward = chartData[i][2] / Math.pow(10, 11);
+}
+
 var chart = AmCharts.makeChart("chartdiv", {
     "type": "serial",
     "theme": "light",
