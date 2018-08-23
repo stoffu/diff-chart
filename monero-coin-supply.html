@@ -64,7 +64,7 @@ for (var i = 0; i < chartData.length; ++i) {
     if (i > 0)
         chartData[i].coin_supply = chartData[i].coin_supply.plus(chartData[i - 1].coin_supply);
     chartData[i].coin_supply_str = print_money(chartData[i].coin_supply, 12);
-    chartData[i].coin_supply_real = chartData[i].coin_supply.toJSNumber() / Math.pow(10, 11);
+    chartData[i].coin_supply_real = chartData[i].coin_supply.toJSNumber() / Math.pow(10, 12);
 }
 
 chartData.shift();
