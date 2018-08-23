@@ -14,6 +14,7 @@
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="util.js"></script>
 <script src="wownero-data-0.js"></script>
 
 <!-- Chart code -->
@@ -24,7 +25,7 @@ chartData.shift();
 for (var i = 0; i < chartData.length; ++i) {
     chartData[i].date = new Date(1000 * chartData[i][0]);
     chartData[i].height = i + 1;
-    chartData[i].reward = chartData[i][2] / Math.pow(10, 11);
+    chartData[i].reward = print_money(chartData[i][2], 11);
 }
 
 var chart = AmCharts.makeChart("chartdiv", {

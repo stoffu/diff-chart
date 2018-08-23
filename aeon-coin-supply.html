@@ -14,6 +14,8 @@
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="BigInteger.js"></script>
+<script src="util.js"></script>
 <script src="aeon-data-0.js"></script>
 <script src="aeon-data-1.js"></script>
 <script src="aeon-data-2.js"></script>
@@ -27,8 +29,8 @@
 
 <!-- Chart code -->
 <script>
-var chartData = chartData_0;
-chartData.shift();
+var chartData = [];
+chartData = chartData.concat(chartData_0);
 chartData = chartData.concat(chartData_1);
 chartData = chartData.concat(chartData_2);
 chartData = chartData.concat(chartData_3);
@@ -39,13 +41,19 @@ chartData = chartData.concat(chartData_7);
 chartData = chartData.concat(chartData_8);
 chartData = chartData.concat(chartData_9);
 
-var coin_supply = 0;
 for (var i = 0; i < chartData.length; ++i) {
     chartData[i].date = new Date(1000 * chartData[i][0]);
-    chartData[i].height = i + 1;
-    coin_supply += chartData[i][2];
-    chartData[i].coin_supply = coin_supply;
+    chartData[i].height = i;
+    chartData[i].coin_supply = bigInt(chartData[i][2]);
+    for (var j = 0; j < chartData[i][4].length; ++j)
+        chartData[i].coin_supply = chartData[i].coin_supply.minus(chartData[i][4][j][4]);
+    if (i > 0)
+        chartData[i].coin_supply = chartData[i].coin_supply.plus(chartData[i - 1].coin_supply);
+    chartData[i].coin_supply_str = print_money(chartData[i].coin_supply, 12);
+    chartData[i].coin_supply_real = chartData[i].coin_supply.toJSNumber() / Math.pow(10, 11);
 }
+
+chartData.shift();
 
 var chart = AmCharts.makeChart("chartdiv", {
     "type": "serial",
@@ -61,13 +69,13 @@ var chart = AmCharts.makeChart("chartdiv", {
     "graphs": [{
         "id": "g1",
         "lineColor": "#cc9900",
-        "balloonText": "Supply: <b>[[value]]</b>\nHeight: <b>[[height]]</b>",
+        "balloonText": "Supply: <b>[[coin_supply_str]]</b>\nHeight: <b>[[height]]</b>",
         "bullet": "round",
         "bulletBorderAlpha": 1,
         "bulletColor": "#FFFFFF",
         "hideBulletsCount": 50,
         "title": "coin supply",
-        "valueField": "coin_supply",
+        "valueField": "coin_supply_real",
         "useLineColorForBulletBorder": true,
         "balloon":{
             "cornerRadius": 10,
