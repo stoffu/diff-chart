@@ -1,5 +1,7 @@
 # Aeon / Monero / Wownero charts
 
+_These JavaScript-based interactive charts are highly memory intensive. You will likely need to increase your browser's limit on the memory usage by providing special flags when launching the browser (e.g. [link](https://stackoverflow.com/questions/29620041/is-there-any-memory-limit-for-google-chrome-browser/))._
+
 ## Aeon
 
 - [Difficulty](https://stoffu.github.io/diff-chart/aeon.html)
