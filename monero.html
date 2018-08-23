@@ -53,6 +53,12 @@ chartData = chartData.concat(chartData_14);
 chartData = chartData.concat(chartData_15);
 chartData = chartData.concat(chartData_16);
 
+for (var i = 0; i < chartData.length; ++i) {
+    chartData[i].date = new Date(1000 * chartData[i][0]);
+    chartData[i].height = i + 1;
+    chartData[i].difficulty = chartData[i][1];
+}
+
 var chart = AmCharts.makeChart("chartdiv", {
     "type": "serial",
     "theme": "light",
