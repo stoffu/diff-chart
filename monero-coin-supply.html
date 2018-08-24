@@ -33,98 +33,29 @@
 <script src="monero-data-14.js"></script>
 <script src="monero-data-15.js"></script>
 <script src="monero-data-16.js"></script>
+<script src="coin-supply.js"></script>
 
 <!-- Chart code -->
 <script>
-var chartData = [];
-chartData = chartData.concat(chartData_0);
-chartData = chartData.concat(chartData_1);
-chartData = chartData.concat(chartData_2);
-chartData = chartData.concat(chartData_3);
-chartData = chartData.concat(chartData_4);
-chartData = chartData.concat(chartData_5);
-chartData = chartData.concat(chartData_6);
-chartData = chartData.concat(chartData_7);
-chartData = chartData.concat(chartData_8);
-chartData = chartData.concat(chartData_9);
-chartData = chartData.concat(chartData_10);
-chartData = chartData.concat(chartData_11);
-chartData = chartData.concat(chartData_12);
-chartData = chartData.concat(chartData_13);
-chartData = chartData.concat(chartData_14);
-chartData = chartData.concat(chartData_15);
-chartData = chartData.concat(chartData_16);
-
-for (var i = 0; i < chartData.length; ++i) {
-    chartData[i].date = new Date(1000 * chartData[i][0]);
-    chartData[i].height = i;
-    chartData[i].coin_supply = bigInt(chartData[i][2]);
-    for (var j = 0; j < chartData[i][4].length; ++j)
-        chartData[i].coin_supply = chartData[i].coin_supply.minus(chartData[i][4][j][4]);
-    if (i > 0)
-        chartData[i].coin_supply = chartData[i].coin_supply.plus(chartData[i - 1].coin_supply);
-    chartData[i].coin_supply_str = print_money(chartData[i].coin_supply, 12);
-    chartData[i].coin_supply_real = chartData[i].coin_supply.toJSNumber() / Math.pow(10, 12);
-}
-
-chartData.shift();
-
-var chart = AmCharts.makeChart("chartdiv", {
-    "type": "serial",
-    "theme": "light",
-    "marginRight": 80,
-    "autoMarginOffset": 20,
-    "marginTop": 7,
-    "dataProvider": chartData,
-    "valueAxes": [{
-        "axisAlpha": 0,
-    }],
-    "mouseWheelZoomEnabled": true,
-    "graphs": [{
-        "id": "g1",
-        "lineColor": "#cc9900",
-        "balloonText": "Supply: <b>[[coin_supply_str]]</b>\nHeight: <b>[[height]]</b>",
-        "bullet": "round",
-        "bulletBorderAlpha": 1,
-        "bulletColor": "#FFFFFF",
-        "hideBulletsCount": 50,
-        "title": "coin supply",
-        "valueField": "coin_supply_real",
-        "useLineColorForBulletBorder": true,
-        "balloon":{
-            "cornerRadius": 10,
-        }
-    }],
-    "chartScrollbar": {
-        "autoGridCount": true,
-        "graph": "g1",
-        "scrollbarHeight": 40
-    },
-    "chartCursor": {
-       "pan": false
-    },
-    "categoryField": "date",
-    "categoryAxis": {
-        "parseDates": true,
-        "minPeriod": "ss",
-        "axisColor": "#DADADA",
-        "dashLength": 1,
-        "minorGridEnabled": true
-    },
-    "export": {
-        "enabled": true,
-        "position": "bottom-right"
-    }
-});
-
-chart.addListener("rendered", zoomChart);
-zoomChart();
-
-// this method is called when chart is first inited as we listen for "rendered" event
-function zoomChart() {
-    // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
-    chart.zoomToIndexes(0, chartData.length - 1);
-}
+var chart = get_chart([].concat(
+    chartData_0,
+    chartData_1,
+    chartData_2,
+    chartData_3,
+    chartData_4,
+    chartData_5,
+    chartData_6,
+    chartData_7,
+    chartData_8,
+    chartData_9,
+    chartData_10,
+    chartData_11,
+    chartData_12,
+    chartData_13,
+    chartData_14,
+    chartData_15,
+    chartData_16,
+    ), 12);
 
 function togglePan() {
   chart.chartCursor.pan = document.getElementById("pan").checked;
