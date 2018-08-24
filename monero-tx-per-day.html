@@ -31,108 +31,29 @@
 <script src="monero-data-14.js"></script>
 <script src="monero-data-15.js"></script>
 <script src="monero-data-16.js"></script>
+<script src="tx-per-day.js"></script>
 
 <!-- Chart code -->
 <script>
-var chartData = chartData_0;
-chartData.shift();
-chartData = chartData.concat(chartData_1);
-chartData = chartData.concat(chartData_2);
-chartData = chartData.concat(chartData_3);
-chartData = chartData.concat(chartData_4);
-chartData = chartData.concat(chartData_5);
-chartData = chartData.concat(chartData_6);
-chartData = chartData.concat(chartData_7);
-chartData = chartData.concat(chartData_8);
-chartData = chartData.concat(chartData_9);
-chartData = chartData.concat(chartData_10);
-chartData = chartData.concat(chartData_11);
-chartData = chartData.concat(chartData_12);
-chartData = chartData.concat(chartData_13);
-chartData = chartData.concat(chartData_14);
-chartData = chartData.concat(chartData_15);
-chartData = chartData.concat(chartData_16);
-
-var chartData_tpd = [];
-var last_date = null;
-var num_txes = 0;
-for (var i = 0; i < chartData.length; ++i) {
-    var block_date = new Date(1000 * chartData[i][0]);
-    block_date.setHours(0);
-    block_date.setMinutes(0);
-    block_date.setSeconds(0);
-    if (last_date === null) {
-        last_date = block_date;
-    }
-    if (last_date < block_date || i == chartData.length - 1) {
-        chartData_tpd.push({
-            "date": last_date,
-            "num_txes": num_txes,
-        });
-        last_date = block_date;
-        num_txes = 0;
-    } else {
-        num_txes += chartData[i][4].length;
-    }
-}
-
-var chart = AmCharts.makeChart("chartdiv", {
-    "type": "serial",
-    "theme": "light",
-    "marginRight": 80,
-    "autoMarginOffset": 20,
-    "marginTop": 7,
-    "dataProvider": chartData_tpd,
-    "valueAxes": [{
-        "axisAlpha": 0.2,
-        "dashLength": 1,
-        "position": "left",
-    }],
-    "mouseWheelZoomEnabled": true,
-    "graphs": [{
-        "id": "g1",
-        "lineColor": "#cc99ff",
-        "balloonText": "<b>[[value]]</b>",
-        "bullet": "round",
-        "bulletBorderAlpha": 1,
-        "bulletColor": "#FFFFFF",
-        "hideBulletsCount": 50,
-        "title": "red line",
-        "valueField": "num_txes",
-        "useLineColorForBulletBorder": true,
-        "balloon":{
-            "cornerRadius": 10,
-        }
-    }],
-    "chartScrollbar": {
-        "autoGridCount": true,
-        "graph": "g1",
-        "scrollbarHeight": 40
-    },
-    "chartCursor": {
-       "limitToGraph":"g1",
-       "pan": false
-    },
-    "categoryField": "date",
-    "categoryAxis": {
-        "parseDates": true,
-        "axisColor": "#DADADA",
-        "dashLength": 1,
-        "minorGridEnabled": true
-    },
-    "export": {
-        "enabled": true
-    }
-});
-
-chart.addListener("rendered", zoomChart);
-zoomChart();
-
-// this method is called when chart is first inited as we listen for "rendered" event
-function zoomChart() {
-    // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
-    chart.zoomToIndexes(0, chartData.length - 1);
-}
+var chart = get_chart([].concat(
+    chartData_0,
+    chartData_1,
+    chartData_2,
+    chartData_3,
+    chartData_4,
+    chartData_5,
+    chartData_6,
+    chartData_7,
+    chartData_8,
+    chartData_9,
+    chartData_10,
+    chartData_11,
+    chartData_12,
+    chartData_13,
+    chartData_14,
+    chartData_15,
+    chartData_16,
+));
 
 function togglePan() {
   chart.chartCursor.pan = document.getElementById("pan").checked;
