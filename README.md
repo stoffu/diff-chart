@@ -11,6 +11,7 @@ _These JavaScript-based interactive charts are highly memory intensive. You will
 - [Blockchain size](https://stoffu.github.io/diff-chart/aeon-bc-size.html)
 - [Block reward](https://stoffu.github.io/diff-chart/aeon-block-reward.html)
 - [Coin supply](https://stoffu.github.io/diff-chart/aeon-coin-supply.html)
+- [Block time](https://stoffu.github.io/diff-chart/aeon-block-time.html)
 
 ## Monero
 
@@ -21,6 +22,7 @@ _These JavaScript-based interactive charts are highly memory intensive. You will
 - [Blockchain size](https://stoffu.github.io/diff-chart/monero-bc-size.html)
 - [Block reward](https://stoffu.github.io/diff-chart/monero-block-reward.html)
 - [Coin supply](https://stoffu.github.io/diff-chart/monero-coin-supply.html)
+- [Block time](https://stoffu.github.io/diff-chart/monero-block-time.html)
 
 ## Wownero
 
@@ -31,3 +33,4 @@ _These JavaScript-based interactive charts are highly memory intensive. You will
 - [Blockchain size](https://stoffu.github.io/diff-chart/wownero-bc-size.html)
 - [Block reward](https://stoffu.github.io/diff-chart/wownero-block-reward.html)
 - [Coin supply](https://stoffu.github.io/diff-chart/wownero-coin-supply.html)
+- [Block time](https://stoffu.github.io/diff-chart/wownero-block-time.html)
