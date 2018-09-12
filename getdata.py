@@ -42,6 +42,7 @@ from test_framework.daemon import Daemon
 import sys
 import datetime
 import json
+import requests
 
 class GetData():
     def run(self, port, height_window_index):
@@ -55,7 +56,13 @@ class GetData():
         assert start_height < end_height
         print('var chartData_%d = [' % height_window_index)
         for i in range(start_height, end_height):
-            res_blk = daemon.getblock(i)
+            while True:
+                try:
+                    res_blk = daemon.getblock(i)
+                    break
+                except requests.exceptions.RequestException as e:
+                    continue
+
             block_header = res_blk['block_header']
 
             timestamp  = block_header['timestamp']
