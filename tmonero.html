@@ -1,0 +1,64 @@
+<html>
+<header><title>Monero Testnet difficulty</title>
+<!-- Styles -->
+<style>
+#chartdiv {
+  width : 100%;
+  height  : 500px;
+}                                 
+</style>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="data/tmonero-data-0.js"></script>
+<script src="data/tmonero-data-1.js"></script>
+<script src="data/tmonero-data-2.js"></script>
+<script src="data/tmonero-data-3.js"></script>
+<script src="data/tmonero-data-4.js"></script>
+<script src="data/tmonero-data-5.js"></script>
+<script src="data/tmonero-data-6.js"></script>
+<script src="data/tmonero-data-7.js"></script>
+<script src="data/tmonero-data-8.js"></script>
+<script src="data/tmonero-data-9.js"></script>
+<script src="data/tmonero-data-10.js"></script>
+<script src="js/diff.js"></script>
+
+<!-- Chart code -->
+<script>
+var chart = get_chart([].concat(
+    chartData_0,
+    chartData_1,
+    chartData_2,
+    chartData_3,
+    chartData_4,
+    chartData_5,
+    chartData_6,
+    chartData_7,
+    chartData_8,
+    chartData_9,
+    chartData_10,
+));
+
+function toggleLogScale() {
+  chart.valueAxes[0].logarithmic = document.getElementById("log_scale").checked;
+  chart.validateNow();
+}
+
+function togglePan() {
+  chart.chartCursor.pan = document.getElementById("pan").checked;
+}
+
+</script>
+</header>
+<body>
+<h1>Monero Testnet difficulty</h1>
+<div id="chartdiv"></div>
+<p><input type="checkbox" id="log_scale" onclick="toggleLogScale()" checked>Log scale</p>
+<p><input type="checkbox" id="pan" onclick="togglePan()">Enable panning</p>
+<p><a href="./">Back to top</a></p>
+</body>
+</html>
