@@ -9,6 +9,16 @@ function formatBytes(bytes, decimal) {
     return "<b>" + parseFloat((bytes / Math.pow(c, f)).toFixed(d)) + "</b> " + e[f]
 }
 
+function formatHashrate(hr, decimal) {
+    if (0 == hr)
+        return "0 H/s";
+    var c = 1000;
+    var d = decimal || 2;
+    var e = ["H/s", "kH/s", "MH/s", "GH/s", "TH/s", "PH/s", "EH/s", "ZH/s", "YH/s"];
+    var f = Math.floor(Math.log(hr) / Math.log(c));
+    return "<b>" + parseFloat((hr / Math.pow(c, f)).toFixed(d)) + "</b> " + e[f]
+}
+
 function print_money(amount, decimal_point) {
     var s1 = String(amount);
     while (s1.length < decimal_point+1)

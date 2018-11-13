@@ -14,6 +14,7 @@
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="js/util.js"></script>
 <script src="data/aeon-data-0.js"></script>
 <script src="data/aeon-data-1.js"></script>
 <script src="data/aeon-data-2.js"></script>
@@ -29,6 +30,10 @@
 
 <!-- Chart code -->
 <script>
+var diff_targets = [
+  { height: 0, value: 60},
+  { height: 592000, value: 240},
+];
 var chart = get_chart([].concat(
     chartData_0,
     chartData_1,
@@ -41,7 +46,7 @@ var chart = get_chart([].concat(
     chartData_8,
     chartData_9,
     chartData_10,
-));
+), diff_targets);
 
 function toggleLogScale() {
   chart.valueAxes[0].logarithmic = document.getElementById("log_scale").checked;

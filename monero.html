@@ -14,6 +14,7 @@
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="js/util.js"></script>
 <script src="data/monero-data-0.js"></script>
 <script src="data/monero-data-1.js"></script>
 <script src="data/monero-data-2.js"></script>
@@ -35,6 +36,10 @@
 
 <!-- Chart code -->
 <script>
+var diff_targets = [
+  { height: 0, value: 60},
+  { height: 1009827, value: 120},
+];
 var chart = get_chart([].concat(
     chartData_0,
     chartData_1,
@@ -53,7 +58,7 @@ var chart = get_chart([].concat(
     chartData_14,
     chartData_15,
     chartData_16,
-));
+), diff_targets);
 
 function toggleLogScale() {
   chart.valueAxes[0].logarithmic = document.getElementById("log_scale").checked;

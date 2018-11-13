@@ -1,10 +1,19 @@
-function get_chart(chartData) {
+function get_diff_target(diff_targets, height) {
+    for (var i = diff_targets.length - 1; i >= 0; --i) {
+        if (diff_targets[i].height <= height)
+            return diff_targets[i].value;
+    }
+    return 0;
+}
+
+function get_chart(chartData, diff_targets) {
     chartData.shift();
 
     for (var i = 0; i < chartData.length; ++i) {
         chartData[i].date = new Date(1000 * chartData[i][0]);
         chartData[i].height = i + 1;
         chartData[i].difficulty = chartData[i][1];
+        chartData[i].hashrate = formatHashrate(chartData[i].difficulty / get_diff_target(diff_targets, chartData[i].height), 2);
     }
 
     var chart = AmCharts.makeChart("chartdiv", {
@@ -22,7 +31,7 @@ function get_chart(chartData) {
         "graphs": [{
             "id": "g1",
             "lineColor": "#67B7DC",
-            "balloonText": "Diff: <b>[[value]]</b>\nHeight: <b>[[height]]</b>",
+            "balloonText": "Height: <b>[[height]]</b>\nDiff: <b>[[value]]</b>\n[[hashrate]]",
             "bullet": "round",
             "bulletBorderAlpha": 1,
             "bulletColor": "#FFFFFF",
