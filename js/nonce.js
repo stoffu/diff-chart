@@ -1,3 +1,5 @@
+var max_num_bullets = 200000;
+
 function get_chart(chartData) {
     chartData.shift();
 
@@ -26,6 +28,7 @@ function get_chart(chartData) {
             "bullet": "square",
             "bulletSize": 1,
             "minBulletSize": 1,
+            "hideBulletsCount": max_num_bullets,
             "balloonText": "Height: <b>[[height]]</b>\nNonce: <b>[[value]]</b>\n",
             "showBalloonAt": "close",
             "title": "nonce",
@@ -35,6 +38,11 @@ function get_chart(chartData) {
                 "animationDuration": 0,
             }
         }],
+        "chartScrollbar": {
+            "autoGridCount": true,
+            "graph": "g1",
+            "scrollbarHeight": 40
+        },
         "chartCursor": {
            "pan": false,
            "categoryBalloonEnabled": false,
@@ -58,7 +66,7 @@ function get_chart(chartData) {
     // this method is called when chart is first inited as we listen for "rendered" event
     function zoomChart() {
         // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
-        chart.zoomToIndexes(0, chartData.length - 1);
+        chart.zoomToIndexes(Math.max(0, chartData.length - max_num_bullets), chartData.length - 1);
     }
     chart.addListener("rendered", zoomChart);
     zoomChart();
