@@ -4,7 +4,7 @@ function get_chart(chartData, decimal_point) {
     for (var i = 0; i < chartData.length; ++i) {
         chartData[i].date = new Date(1000 * chartData[i][0]);
         chartData[i].height = i + 1;
-        chartData[i].reward = print_money(chartData[i][2], decimal_point);
+        chartData[i].reward = print_money(chartData[i][3], decimal_point);
     }
 
     var chart = AmCharts.makeChart("chartdiv", {

@@ -66,6 +66,7 @@ class GetData():
             block_header = res_blk['block_header']
 
             timestamp  = block_header['timestamp']
+            nonce      = block_header['nonce']
             difficulty = block_header['difficulty']
             reward     = block_header['reward']
             block_size = block_header['block_size']
@@ -97,7 +98,7 @@ class GetData():
                 if j > 0:
                     txs_str += ','
                 txs_str += "[%d,%d,%d,%d,%d,%d]" % (unlock_time, ins, outs, ring_size, fee, extra_size)
-            print('[%d,%d,%d,%d,[%s]],' % (timestamp, difficulty, reward, block_size, txs_str))
+            print('[%d,%d,%d,%d,%d,[%s]],' % (timestamp, nonce, difficulty, reward, block_size, txs_str))
         print(']')
 
 if __name__ == '__main__':

@@ -4,7 +4,7 @@ function get_chart(chartData) {
     for (var i = 0; i < chartData.length; ++i) {
         chartData[i].date = new Date(1000 * chartData[i][0]);
         chartData[i].height = i + 1;
-        chartData[i].bc_size = chartData[i][3];
+        chartData[i].bc_size = chartData[i][4];
         if (i > 0)
           chartData[i].bc_size += chartData[i - 1].bc_size;
         chartData[i].bc_size_str = formatBytes(chartData[i].bc_size, 3);

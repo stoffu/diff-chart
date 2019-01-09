@@ -2,9 +2,9 @@ function get_chart(chartData, decimal_point) {
     for (var i = 0; i < chartData.length; ++i) {
         chartData[i].date = new Date(1000 * chartData[i][0]);
         chartData[i].height = i;
-        chartData[i].coin_supply = bigInt(chartData[i][2]);
-        for (var j = 0; j < chartData[i][4].length; ++j)
-            chartData[i].coin_supply = chartData[i].coin_supply.minus(chartData[i][4][j][4]);
+        chartData[i].coin_supply = bigInt(chartData[i][3]);
+        for (var j = 0; j < chartData[i][5].length; ++j)
+            chartData[i].coin_supply = chartData[i].coin_supply.minus(chartData[i][5][j][4]);
         if (i > 0)
             chartData[i].coin_supply = chartData[i].coin_supply.plus(chartData[i - 1].coin_supply);
         chartData[i].coin_supply_str = print_money(chartData[i].coin_supply, decimal_point);

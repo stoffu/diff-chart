@@ -15,7 +15,7 @@ function get_chart(chartData) {
                 "num_txes": 0,
             });
         }
-        chartData_tpd[chartData_tpd.length - 1].num_txes += chartData[i][4].length;
+        chartData_tpd[chartData_tpd.length - 1].num_txes += chartData[i][5].length;
     }
 
     var chart = AmCharts.makeChart("chartdiv", {

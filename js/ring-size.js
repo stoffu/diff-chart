@@ -18,9 +18,9 @@ function get_chart(chartData, levels) {
             num_txes_per_day[block_date] = 0;
         }
         var e = chartData_rs[chartData_rs.length - 1];
-        var num_txes = chartData[i][4].length;
+        var num_txes = chartData[i][5].length;
         if (num_txes > 0) {
-            var ring_size = chartData[i][4][0][3];
+            var ring_size = chartData[i][5][0][3];
             while (ring_size >=  e.histogram.length) {
                 e.histogram.push(0);
             }

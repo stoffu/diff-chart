@@ -1,19 +1,10 @@
-function get_diff_target(diff_targets, height) {
-    for (var i = diff_targets.length - 1; i >= 0; --i) {
-        if (diff_targets[i].height <= height)
-            return diff_targets[i].value;
-    }
-    return 0;
-}
-
-function get_chart(chartData, diff_targets) {
+function get_chart(chartData) {
     chartData.shift();
 
     for (var i = 0; i < chartData.length; ++i) {
         chartData[i].date = new Date(1000 * chartData[i][0]);
         chartData[i].height = i + 1;
-        chartData[i].difficulty = chartData[i][2];
-        chartData[i].hashrate = formatHashrate(chartData[i].difficulty / get_diff_target(diff_targets, chartData[i].height), 2);
+        chartData[i].nonce = chartData[i][1];
     }
 
     var chart = AmCharts.makeChart("chartdiv", {
@@ -25,31 +16,30 @@ function get_chart(chartData, diff_targets) {
         "dataProvider": chartData,
         "valueAxes": [{
             "axisAlpha": 0,
-            "logarithmic": true
         }],
         "mouseWheelZoomEnabled": true,
         "graphs": [{
             "id": "g1",
-            "lineColor": "#67B7DC",
-            "balloonText": "Height: <b>[[height]]</b>\nDiff: <b>[[value]]</b>\n[[hashrate]]",
-            "bullet": "round",
-            "bulletBorderAlpha": 1,
-            "bulletColor": "#FFFFFF",
-            "hideBulletsCount": 50,
-            "title": "difficulty",
-            "valueField": "difficulty",
-            "useLineColorForBulletBorder": true,
+            "lineColor": "#800040",
+            "lineAlpha": 0,
+            "bulletAlpha": 1,
+            "bullet": "square",
+            "bulletSize": 1,
+            "minBulletSize": 1,
+            "balloonText": "Height: <b>[[height]]</b>\nNonce: <b>[[value]]</b>\n",
+            "showBalloonAt": "close",
+            "title": "nonce",
+            "valueField": "nonce",
             "balloon":{
                 "cornerRadius": 10,
+                "animationDuration": 0,
             }
         }],
-        "chartScrollbar": {
-            "autoGridCount": true,
-            "graph": "g1",
-            "scrollbarHeight": 40
-        },
         "chartCursor": {
-           "pan": false
+           "pan": false,
+           "categoryBalloonEnabled": false,
+           "animationDuration": 0,
+           "cursorAlpha": 0,
         },
         "categoryField": "date",
         "categoryAxis": {
