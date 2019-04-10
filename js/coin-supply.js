@@ -1,14 +1,27 @@
-function get_chart(chartData, decimal_point) {
+function get_chart(chartData, cryptonote_config) {
     for (var i = 0; i < chartData.length; ++i) {
         chartData[i].date = new Date(1000 * chartData[i][0]);
         chartData[i].height = i;
         chartData[i].coin_supply = bigInt(chartData[i][3]);
         for (var j = 0; j < chartData[i][5].length; ++j)
-            chartData[i].coin_supply = chartData[i].coin_supply.minus(chartData[i][5][j][4]);
+            chartData[i].coin_supply = chartData[i].coin_supply.minus(chartData[i][5][j][4]);   // subtract fees
         if (i > 0)
             chartData[i].coin_supply = chartData[i].coin_supply.plus(chartData[i - 1].coin_supply);
-        chartData[i].coin_supply_str = print_money(chartData[i].coin_supply, decimal_point);
-        chartData[i].coin_supply_real = chartData[i].coin_supply.toJSNumber() / Math.pow(10, decimal_point);
+        chartData[i].coin_supply_str = print_money(chartData[i].coin_supply, cryptonote_config.CRYPTONOTE_DISPLAY_DECIMAL_POINT);
+        chartData[i].coin_supply_real = chartData[i].coin_supply.toJSNumber() / Math.pow(10, cryptonote_config.CRYPTONOTE_DISPLAY_DECIMAL_POINT);
+        // projected supply
+        var target = cryptonote_config.get_difficulty_target(i);
+        var target_minutes = target / 60;
+        var emission_speed_factor = cryptonote_config.get_emission_speed_factor(target_minutes);
+        var already_generated_coins = i == 0 ? bigInt(0) : chartData[i - 1].coin_supply_proj;
+        var base_reward = bigInt(cryptonote_config.MONEY_SUPPLY).minus(already_generated_coins).shiftRight(emission_speed_factor);
+        if (base_reward.lesser(cryptonote_config.FINAL_SUBSIDY_PER_MINUTE * target_minutes))
+        {
+          base_reward = bigInt(cryptonote_config.FINAL_SUBSIDY_PER_MINUTE * target_minutes);
+        }
+        chartData[i].coin_supply_proj = base_reward.plus(already_generated_coins);
+        chartData[i].coin_supply_proj_str = print_money(chartData[i].coin_supply_proj, cryptonote_config.CRYPTONOTE_DISPLAY_DECIMAL_POINT);
+        chartData[i].coin_supply_proj_real = chartData[i].coin_supply_proj.toJSNumber() / Math.pow(10, cryptonote_config.CRYPTONOTE_DISPLAY_DECIMAL_POINT);
     }
 
     chartData.shift();
@@ -27,7 +40,7 @@ function get_chart(chartData, decimal_point) {
         "graphs": [{
             "id": "g1",
             "lineColor": "#cc9900",
-            "balloonText": "Supply: <b>[[coin_supply_str]]</b>\nHeight: <b>[[height]]</b>",
+            "balloonText": "Supply: <b>[[coin_supply_str]]</b>\n(Proj: [[coin_supply_proj_str]])\nHeight: <b>[[height]]</b>",
             "bullet": "round",
             "bulletBorderAlpha": 1,
             "bulletColor": "#FFFFFF",
@@ -38,6 +51,18 @@ function get_chart(chartData, decimal_point) {
             "balloon":{
                 "cornerRadius": 10,
             }
+        },{
+            "id": "g2",
+            "lineColor": "#447700",
+            "bullet": "round",
+            "bulletBorderAlpha": 1,
+            "bulletColor": "#FFFFFF",
+            "hideBulletsCount": 50,
+            "title": "projected coin supply",
+            "valueField": "coin_supply_proj_real",
+            "useLineColorForBulletBorder": true,
+            "showBalloon": false,
+            "hidden": true,
         }],
         "chartScrollbar": {
             "autoGridCount": true,

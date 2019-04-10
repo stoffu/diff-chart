@@ -17,13 +17,11 @@
 <script src="js/util.js"></script>
 <script src="data/wownero-data-0.js"></script>
 <script src="js/diff.js"></script>
+<script src="wownero-config.js"></script>
 
 <!-- Chart code -->
 <script>
-var diff_targets = [
-  { height: 0, value: 300},
-];
-var chart = get_chart(chartData_0, diff_targets);
+var chart = get_chart(chartData_0, wownero_config);
 
 function toggleLogScale() {
   chart.valueAxes[0].logarithmic = document.getElementById("log_scale").checked;

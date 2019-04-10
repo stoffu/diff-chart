@@ -1,19 +1,11 @@
-function get_diff_target(diff_targets, height) {
-    for (var i = diff_targets.length - 1; i >= 0; --i) {
-        if (diff_targets[i].height <= height)
-            return diff_targets[i].value;
-    }
-    return 0;
-}
-
-function get_chart(chartData, diff_targets) {
+function get_chart(chartData, cryptonote_config) {
     chartData.shift();
 
     for (var i = 0; i < chartData.length; ++i) {
         chartData[i].date = new Date(1000 * chartData[i][0]);
         chartData[i].height = i + 1;
         chartData[i].difficulty = chartData[i][2];
-        chartData[i].hashrate = formatHashrate(chartData[i].difficulty / get_diff_target(diff_targets, chartData[i].height), 2);
+        chartData[i].hashrate = formatHashrate(chartData[i].difficulty / cryptonote_config.get_difficulty_target(chartData[i].height), 2);
     }
 
     var chart = AmCharts.makeChart("chartdiv", {

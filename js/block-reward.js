@@ -1,10 +1,10 @@
-function get_chart(chartData, decimal_point) {
+function get_chart(chartData, cryptonote_config) {
     chartData.shift();
 
     for (var i = 0; i < chartData.length; ++i) {
         chartData[i].date = new Date(1000 * chartData[i][0]);
         chartData[i].height = i + 1;
-        chartData[i].reward = print_money(chartData[i][3], decimal_point);
+        chartData[i].reward = print_money(chartData[i][3], cryptonote_config.CRYPTONOTE_DISPLAY_DECIMAL_POINT);
     }
 
     var chart = AmCharts.makeChart("chartdiv", {

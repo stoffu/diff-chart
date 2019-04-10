@@ -28,6 +28,7 @@
 <script src="data/aeon-data-9.js"></script>
 <script src="data/aeon-data-10.js"></script>
 <script src="js/coin-supply.js"></script>
+<script src="aeon-config.js"></script>
 
 <!-- Chart code -->
 <script>
@@ -43,7 +44,12 @@ var chart = get_chart([].concat(
     chartData_8,
     chartData_9,
     chartData_10,
-    ), 12);
+    ), aeon_config);
+
+function toggleProj() {
+  chart.graphs[1].hidden = !document.getElementById("proj").checked;
+  chart.validateNow();
+}
 
 function togglePan() {
   chart.chartCursor.pan = document.getElementById("pan").checked;
@@ -54,6 +60,7 @@ function togglePan() {
 <body>
 <h1>Aeon coin supply</h1>
 <div id="chartdiv"></div>
+<p><input type="checkbox" id="proj" onclick="toggleProj()">Show projected supply</p>
 <p><input type="checkbox" id="pan" onclick="togglePan()">Enable panning</p>
 <p><a href="./">Back to top</a></p>
 </body>
