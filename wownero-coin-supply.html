@@ -17,12 +17,16 @@
 <script src="js/BigInteger.js"></script>
 <script src="js/util.js"></script>
 <script src="data/wownero-data-0.js"></script>
+<script src="data/wownero-data-1.js"></script>
 <script src="js/coin-supply.js"></script>
 <script src="wownero-config.js"></script>
 
 <!-- Chart code -->
 <script>
-var chart = get_chart(chartData_0, wownero_config);
+var chart = get_chart([].concat(
+  chartData_0,
+  chartData_1
+), wownero_config);
 
 function toggleProj() {
   chart.graphs[1].hidden = !document.getElementById("proj").checked;
