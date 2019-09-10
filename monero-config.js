@@ -12,3 +12,10 @@ var monero_config = {
       return this.EMISSION_SPEED_FACTOR_PER_MINUTE - (target_minutes - 1);
     },
 };
+
+var monero_offset_1 = {
+    height: 1000000,
+    supply: bigInt("11319902360375037196"),
+    supply_proj: bigInt("11338799512357636715"),
+    bc_size: 2630363526,
+};

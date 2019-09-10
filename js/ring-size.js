@@ -1,5 +1,6 @@
-function get_chart(chartData, levels) {
-    chartData.shift();
+function get_chart(chartData, levels, offset) {
+    if (offset === undefined)
+        chartData.shift();
     var chartData_rs = [];
     var block_date = null;
     var num_txes_per_day = {};

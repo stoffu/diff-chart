@@ -1,5 +1,6 @@
-function get_chart(chartData) {
-    chartData.shift();
+function get_chart(chartData, offset) {
+    if (offset === undefined)
+        chartData.shift();
     var chartData_bt = [];
     var block_date = null;
 

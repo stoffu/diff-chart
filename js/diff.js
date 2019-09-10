@@ -1,9 +1,10 @@
-function get_chart(chartData, cryptonote_config) {
-    chartData.shift();
+function get_chart(chartData, cryptonote_config, offset) {
+    if (offset === undefined)
+        chartData.shift();
 
     for (var i = 0; i < chartData.length; ++i) {
         chartData[i].date = new Date(1000 * chartData[i][0]);
-        chartData[i].height = i + 1;
+        chartData[i].height = i + (offset === undefined ? 1 : offset.height);
         chartData[i].difficulty = chartData[i][2];
         chartData[i].hashrate = formatHashrate(chartData[i].difficulty / cryptonote_config.get_difficulty_target(chartData[i].height), 2);
     }

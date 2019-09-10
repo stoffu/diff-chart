@@ -25,3 +25,10 @@ var aeon_config = {
       return this.EMISSION_SPEED_FACTOR_PER_MINUTE - int_log2(target_minutes);
     },
 };
+
+var aeon_offset_1 = {
+    height: 1000000,
+    supply: "16230799273689217059",
+    supply_proj: "16234708945129113452",
+    bc_size: 2745344988,
+};

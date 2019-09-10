@@ -25,6 +25,7 @@
 <script src="data/monero-data-18.js"></script>
 <script src="data/monero-data-19.js"></script>
 <script src="js/ring-size.js"></script>
+<script src="monero-config.js"></script>
 
 <!-- Chart code -->
 <script>
@@ -41,7 +42,7 @@ var chart = get_chart(
         chartData_18,
         chartData_19,
     ),
-    [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,20,30,40,50,100]
+    [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,20,30,40,50,100], monero_offset_1
 );
 
 function togglePan() {

@@ -18,13 +18,14 @@
 <script src="data/aeon-data-10.js"></script>
 <script src="data/aeon-data-11.js"></script>
 <script src="js/block-size.js"></script>
+<script src="aeon-config.js"></script>
 
 <!-- Chart code -->
 <script>
 var chart = get_chart([].concat(
     chartData_10,
     chartData_11,
-));
+), aeon_offset_1);
 
 function togglePan() {
   chart.chartCursor.pan = document.getElementById("pan").checked;

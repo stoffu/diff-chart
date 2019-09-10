@@ -1,10 +1,13 @@
-function get_chart(chartData) {
-    chartData.shift();
+function get_chart(chartData, offset) {
+    if (offset === undefined)
+        chartData.shift();
 
     for (var i = 0; i < chartData.length; ++i) {
         chartData[i].date = new Date(1000 * chartData[i][0]);
-        chartData[i].height = i + 1;
+        chartData[i].height = i + (offset === undefined ? 1 : offset.height);
         chartData[i].bc_size = chartData[i][4];
+        if (i === 0 && offset !== undefined)
+          chartData[i].bc_size += offset.bc_size;
         if (i > 0)
           chartData[i].bc_size += chartData[i - 1].bc_size;
         chartData[i].bc_size_str = formatBytes(chartData[i].bc_size, 3);

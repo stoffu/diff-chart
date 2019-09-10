@@ -1,11 +1,12 @@
 var max_num_bullets = 200000;
 
-function get_chart(chartData) {
-    chartData.shift();
+function get_chart(chartData, offset) {
+    if (offset === undefined)
+        chartData.shift();
 
     for (var i = 0; i < chartData.length; ++i) {
         chartData[i].date = new Date(1000 * chartData[i][0]);
-        chartData[i].height = i + 1;
+        chartData[i].height = i + (offset === undefined ? 1 : offset.height);
         chartData[i].nonce = chartData[i][1];
     }
 
