@@ -1,5 +1,5 @@
 <html>
-<header><title>Monero blockchain size</title>
+<header><title>Monero block reward</title>
 <!-- Styles -->
 <style>
 #chartdiv {
@@ -25,17 +25,8 @@
 <script src="data/monero-data-7.js"></script>
 <script src="data/monero-data-8.js"></script>
 <script src="data/monero-data-9.js"></script>
-<script src="data/monero-data-10.js"></script>
-<script src="data/monero-data-11.js"></script>
-<script src="data/monero-data-12.js"></script>
-<script src="data/monero-data-13.js"></script>
-<script src="data/monero-data-14.js"></script>
-<script src="data/monero-data-15.js"></script>
-<script src="data/monero-data-16.js"></script>
-<script src="data/monero-data-17.js"></script>
-<script src="data/monero-data-18.js"></script>
-<script src="data/monero-data-19.js"></script>
-<script src="js/bc-size.js"></script>
+<script src="js/block-reward.js"></script>
+<script src="monero-config.js"></script>
 
 <!-- Chart code -->
 <script>
@@ -50,17 +41,7 @@ var chart = get_chart([].concat(
     chartData_7,
     chartData_8,
     chartData_9,
-    chartData_10,
-    chartData_11,
-    chartData_12,
-    chartData_13,
-    chartData_14,
-    chartData_15,
-    chartData_16,
-    chartData_17,
-    chartData_18,
-    chartData_19,
-));
+    ), monero_config);
 
 function togglePan() {
   chart.chartCursor.pan = document.getElementById("pan").checked;
@@ -69,7 +50,7 @@ function togglePan() {
 </script>
 </header>
 <body>
-<h1>Monero blockchain size</h1>
+<h1>Monero block reward</h1>
 <div id="chartdiv"></div>
 <p><input type="checkbox" id="pan" onclick="togglePan()">Enable panning</p>
 <p><a href="./">Back to top</a></p>

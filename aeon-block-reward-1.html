@@ -1,0 +1,42 @@
+<html>
+<header><title>Aeon block reward</title>
+<!-- Styles -->
+<style>
+#chartdiv {
+  width : 100%;
+  height  : 500px;
+}                                 
+</style>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="js/util.js"></script>
+<script src="data/aeon-data-10.js"></script>
+<script src="data/aeon-data-11.js"></script>
+<script src="js/block-reward.js"></script>
+<script src="aeon-config.js"></script>
+
+<!-- Chart code -->
+<script>
+var chart = get_chart([].concat(
+    chartData_10,
+    chartData_11,
+    ), aeon_config);
+
+function togglePan() {
+  chart.chartCursor.pan = document.getElementById("pan").checked;
+}
+
+</script>
+</header>
+<body>
+<h1>Aeon block reward</h1>
+<div id="chartdiv"></div>
+<p><input type="checkbox" id="pan" onclick="togglePan()">Enable panning</p>
+<p><a href="./">Back to top</a></p>
+</body>
+</html>

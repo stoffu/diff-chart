@@ -1,5 +1,5 @@
 <html>
-<header><title>Aeon block size</title>
+<header><title>Monero block size</title>
 <!-- Styles -->
 <style>
 #chartdiv {
@@ -15,35 +15,31 @@
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 <script src="js/util.js"></script>
-<script src="data/aeon-data-0.js"></script>
-<script src="data/aeon-data-1.js"></script>
-<script src="data/aeon-data-2.js"></script>
-<script src="data/aeon-data-3.js"></script>
-<script src="data/aeon-data-4.js"></script>
-<script src="data/aeon-data-5.js"></script>
-<script src="data/aeon-data-6.js"></script>
-<script src="data/aeon-data-7.js"></script>
-<script src="data/aeon-data-8.js"></script>
-<script src="data/aeon-data-9.js"></script>
-<script src="data/aeon-data-10.js"></script>
-<script src="data/aeon-data-11.js"></script>
+<script src="data/monero-data-10.js"></script>
+<script src="data/monero-data-11.js"></script>
+<script src="data/monero-data-12.js"></script>
+<script src="data/monero-data-13.js"></script>
+<script src="data/monero-data-14.js"></script>
+<script src="data/monero-data-15.js"></script>
+<script src="data/monero-data-16.js"></script>
+<script src="data/monero-data-17.js"></script>
+<script src="data/monero-data-18.js"></script>
+<script src="data/monero-data-19.js"></script>
 <script src="js/block-size.js"></script>
 
 <!-- Chart code -->
 <script>
 var chart = get_chart([].concat(
-    chartData_0,
-    chartData_1,
-    chartData_2,
-    chartData_3,
-    chartData_4,
-    chartData_5,
-    chartData_6,
-    chartData_7,
-    chartData_8,
-    chartData_9,
     chartData_10,
     chartData_11,
+    chartData_12,
+    chartData_13,
+    chartData_14,
+    chartData_15,
+    chartData_16,
+    chartData_17,
+    chartData_18,
+    chartData_19,
 ));
 
 function togglePan() {
@@ -53,7 +49,7 @@ function togglePan() {
 </script>
 </header>
 <body>
-<h1>Aeon block size</h1>
+<h1>Monero block size</h1>
 <div id="chartdiv"></div>
 <p><input type="checkbox" id="pan" onclick="togglePan()">Enable panning</p>
 <p><a href="./">Back to top</a></p>

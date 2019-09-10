@@ -1,5 +1,5 @@
 <html>
-<header><title>Aeon block time</title>
+<header><title>Aeon ring sizes</title>
 <!-- Styles -->
 <style>
 #chartdiv {
@@ -14,7 +14,6 @@
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-<script src="js/util.js"></script>
 <script src="data/aeon-data-0.js"></script>
 <script src="data/aeon-data-1.js"></script>
 <script src="data/aeon-data-2.js"></script>
@@ -25,26 +24,25 @@
 <script src="data/aeon-data-7.js"></script>
 <script src="data/aeon-data-8.js"></script>
 <script src="data/aeon-data-9.js"></script>
-<script src="data/aeon-data-10.js"></script>
-<script src="data/aeon-data-11.js"></script>
-<script src="js/block-time.js"></script>
+<script src="js/ring-size.js"></script>
 
 <!-- Chart code -->
 <script>
-var chart = get_chart([].concat(
-    chartData_0,
-    chartData_1,
-    chartData_2,
-    chartData_3,
-    chartData_4,
-    chartData_5,
-    chartData_6,
-    chartData_7,
-    chartData_8,
-    chartData_9,
-    chartData_10,
-    chartData_11,
-));
+var chart = get_chart(
+    [].concat(
+        chartData_0,
+        chartData_1,
+        chartData_2,
+        chartData_3,
+        chartData_4,
+        chartData_5,
+        chartData_6,
+        chartData_7,
+        chartData_8,
+        chartData_9,
+    ),
+    [1,2,3,4,5,6,7,8,9,10,15,20,50,100]
+);
 
 function togglePan() {
   chart.chartCursor.pan = document.getElementById("pan").checked;
@@ -53,7 +51,7 @@ function togglePan() {
 </script>
 </header>
 <body>
-<h1>Aeon block time</h1>
+<h1>Aeon ring sizes</h1>
 <div id="chartdiv"></div>
 <p><input type="checkbox" id="pan" onclick="togglePan()">Enable panning</p>
 <p><a href="./">Back to top</a></p>

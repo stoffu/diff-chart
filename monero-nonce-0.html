@@ -1,5 +1,5 @@
 <html>
-<header><title>Monero coin supply</title>
+<header><title>Monero nonce</title>
 <!-- Styles -->
 <style>
 #chartdiv {
@@ -14,7 +14,6 @@
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-<script src="js/BigInteger.js"></script>
 <script src="js/util.js"></script>
 <script src="data/monero-data-0.js"></script>
 <script src="data/monero-data-1.js"></script>
@@ -26,18 +25,7 @@
 <script src="data/monero-data-7.js"></script>
 <script src="data/monero-data-8.js"></script>
 <script src="data/monero-data-9.js"></script>
-<script src="data/monero-data-10.js"></script>
-<script src="data/monero-data-11.js"></script>
-<script src="data/monero-data-12.js"></script>
-<script src="data/monero-data-13.js"></script>
-<script src="data/monero-data-14.js"></script>
-<script src="data/monero-data-15.js"></script>
-<script src="data/monero-data-16.js"></script>
-<script src="data/monero-data-17.js"></script>
-<script src="data/monero-data-18.js"></script>
-<script src="data/monero-data-19.js"></script>
-<script src="js/coin-supply.js"></script>
-<script src="monero-config.js"></script>
+<script src="js/nonce.js"></script>
 
 <!-- Chart code -->
 <script>
@@ -52,22 +40,7 @@ var chart = get_chart([].concat(
     chartData_7,
     chartData_8,
     chartData_9,
-    chartData_10,
-    chartData_11,
-    chartData_12,
-    chartData_13,
-    chartData_14,
-    chartData_15,
-    chartData_16,
-    chartData_17,
-    chartData_18,
-    chartData_19,
-    ), monero_config);
-
-function toggleProj() {
-  chart.graphs[1].hidden = !document.getElementById("proj").checked;
-  chart.validateNow();
-}
+));
 
 function togglePan() {
   chart.chartCursor.pan = document.getElementById("pan").checked;
@@ -76,9 +49,9 @@ function togglePan() {
 </script>
 </header>
 <body>
-<h1>Monero coin supply</h1>
+<h1>Monero nonce</h1>
+<p>Since drawing many points in amCharts is somehow very slow and can make your browser unresponsive, the maximum number of points being drawn is limited to 200000 which is what the initial zoom level shows. For easily viewing the past data, use the "Show all" button to maximally zoom out and then use mouse dragging to select the time period as you wish.</p>
 <div id="chartdiv"></div>
-<p><input type="checkbox" id="proj" onclick="toggleProj()">Show projected supply</p>
 <p><input type="checkbox" id="pan" onclick="togglePan()">Enable panning</p>
 <p><a href="./">Back to top</a></p>
 </body>
