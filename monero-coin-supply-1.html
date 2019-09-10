@@ -31,6 +31,11 @@
 
 <!-- Chart code -->
 <script>
+var offset = {
+    height: 1000000,
+    supply: bigInt("11319902360375037196"),
+    supply_proj: bigInt("11338799512357636715")
+};
 var chart = get_chart([].concat(
     chartData_10,
     chartData_11,
@@ -42,7 +47,7 @@ var chart = get_chart([].concat(
     chartData_17,
     chartData_18,
     chartData_19,
-    ), monero_config);
+    ), monero_config, offset);
 
 function toggleProj() {
   chart.graphs[1].hidden = !document.getElementById("proj").checked;

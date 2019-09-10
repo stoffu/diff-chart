@@ -23,10 +23,15 @@
 
 <!-- Chart code -->
 <script>
+var offset = {
+    height: 1000000,
+    supply: bigInt("16230799273689217059"),
+    supply_proj: bigInt("16234708945129113452")
+};
 var chart = get_chart([].concat(
     chartData_10,
     chartData_11,
-    ), aeon_config);
+    ), aeon_config, offset);
 
 function toggleProj() {
   chart.graphs[1].hidden = !document.getElementById("proj").checked;

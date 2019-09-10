@@ -1,19 +1,21 @@
-function get_chart(chartData, cryptonote_config) {
+function get_chart(chartData, cryptonote_config, offset) {
     for (var i = 0; i < chartData.length; ++i) {
         chartData[i].date = new Date(1000 * chartData[i][0]);
         chartData[i].height = i;
         chartData[i].coin_supply = bigInt(chartData[i][3]);
         for (var j = 0; j < chartData[i][5].length; ++j)
             chartData[i].coin_supply = chartData[i].coin_supply.minus(chartData[i][5][j][4]);   // subtract fees
+        if (i === 0 && offset !== undefined)
+            chartData[i].coin_supply = chartData[i].coin_supply.plus(offset.supply);
         if (i > 0)
             chartData[i].coin_supply = chartData[i].coin_supply.plus(chartData[i - 1].coin_supply);
         chartData[i].coin_supply_str = print_money(chartData[i].coin_supply, cryptonote_config.CRYPTONOTE_DISPLAY_DECIMAL_POINT);
         chartData[i].coin_supply_real = chartData[i].coin_supply.toJSNumber() / Math.pow(10, cryptonote_config.CRYPTONOTE_DISPLAY_DECIMAL_POINT);
         // projected supply
-        var target = cryptonote_config.get_difficulty_target(i);
+        var target = cryptonote_config.get_difficulty_target((offset === undefined ? 0 : offset.height) + i);
         var target_minutes = target / 60;
         var emission_speed_factor = cryptonote_config.get_emission_speed_factor(target_minutes);
-        var already_generated_coins = i == 0 ? bigInt(0) : chartData[i - 1].coin_supply_proj;
+        var already_generated_coins = i == 0 ? (offset === undefined ? bigInt(0) : offset.supply_proj) : chartData[i - 1].coin_supply_proj;
         var base_reward = bigInt(cryptonote_config.MONEY_SUPPLY).minus(already_generated_coins).shiftRight(emission_speed_factor);
         if (base_reward.lesser(cryptonote_config.FINAL_SUBSIDY_PER_MINUTE * target_minutes))
         {
