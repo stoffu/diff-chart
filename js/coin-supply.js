@@ -3,8 +3,8 @@ function get_chart(chartData, cryptonote_config, offset) {
         chartData[i].date = new Date(1000 * chartData[i][0]);
         chartData[i].height = i + (offset === undefined ? 0 : offset.height);
         chartData[i].coin_supply = bigInt(chartData[i][3]);
-        for (var j = 0; j < chartData[i][5].length; ++j)
-            chartData[i].coin_supply = chartData[i].coin_supply.minus(chartData[i][5][j][4]);   // subtract fees
+        for (var j = 0; j < chartData[i][6].length; ++j)
+            chartData[i].coin_supply = chartData[i].coin_supply.minus(chartData[i][6][j][4]);   // subtract fees
         if (i === 0 && offset !== undefined)
             chartData[i].coin_supply = chartData[i].coin_supply.plus(offset.supply);
         if (i > 0)
