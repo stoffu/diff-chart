@@ -20,14 +20,14 @@ function get_chart(chartData, levels, offset) {
         }
         var e = chartData_rs[chartData_rs.length - 1];
         var num_txes = chartData[i][6].length;
-        if (num_txes > 0) {
-            var ring_size = chartData[i][6][0][3];
+        for (var j = 0; j < num_txes; ++j) {
+            var ring_size = chartData[i][6][j][3];
             while (ring_size >=  e.histogram.length) {
                 e.histogram.push(0);
             }
-            e.histogram[ring_size] += num_txes;
-            num_txes_per_day[block_date] += num_txes;
+            e.histogram[ring_size] += 1;
         }
+        num_txes_per_day[block_date] += num_txes;
     }
 
     for (var i = 0; i < chartData_rs.length; ++i) {
