@@ -39,10 +39,10 @@ function getStats(values) {
     values.sort(function(a,b){return a-b;});
     var max = values[values.length - 1];
     var min = values[0];
-    var mean = 0;
+    var total = 0;
     for (var i = 0; i < values.length; ++i)
-        mean += values[i];
-    mean /= values.length;
+        total += values[i];
+    mean = total / values.length;
     var stddev = 0;
     for (var i = 0; i < values.length; ++i)
         stddev += (values[i]-mean) * (values[i]-mean);
@@ -51,5 +51,5 @@ function getStats(values) {
     var median = values[median_idx];
     if (values.length%2 == 0)
         median = (median + values[median_idx + 1]) / 2;
-    return {"max":max, "min":min, "mean":mean, "stddev":stddev, "median":median};
+    return {"max":max, "min":min, "mean":mean, "stddev":stddev, "median":median, "total":total};
 }

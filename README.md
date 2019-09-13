@@ -13,6 +13,7 @@ _These JavaScript-based interactive charts are highly memory intensive. You will
 - [Coin supply](https://stoffu.github.io/diff-chart/aeon-coin-supply-1.html) ([0]((https://stoffu.github.io/diff-chart/aeon-coin-supply-0.html)))
 - [Block time](https://stoffu.github.io/diff-chart/aeon-block-time-1.html) ([0]((https://stoffu.github.io/diff-chart/aeon-block-time-0.html)))
 - [Nonce](https://stoffu.github.io/diff-chart/aeon-nonce-1.html) ([0]((https://stoffu.github.io/diff-chart/aeon-nonce-0.html)))
+- [Amount](https://stoffu.github.io/diff-chart/aeon-amount-1.html) ([0]((https://stoffu.github.io/diff-chart/aeon-amount-0.html)))
 
 ## Monero
 
@@ -25,6 +26,7 @@ _These JavaScript-based interactive charts are highly memory intensive. You will
 - [Coin supply](https://stoffu.github.io/diff-chart/monero-coin-supply-1.html) ([0]((https://stoffu.github.io/diff-chart/monero-coin-supply-0.html)))
 - [Block time](https://stoffu.github.io/diff-chart/monero-block-time-1.html) ([0]((https://stoffu.github.io/diff-chart/monero-block-time-0.html)))
 - [Nonce](https://stoffu.github.io/diff-chart/monero-nonce-1.html) ([0]((https://stoffu.github.io/diff-chart/monero-nonce-0.html)))
+- [Amount](https://stoffu.github.io/diff-chart/monero-amount-1.html) ([0]((https://stoffu.github.io/diff-chart/monero-amount-0.html)))
 
 ## Wownero
 

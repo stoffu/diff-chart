@@ -85,21 +85,17 @@ class GetData():
                 ins = len(tx['vin'])
                 outs = len(tx['vout'])
                 ring_size = len(tx['vin'][0]['key']['key_offsets'])
-                fee = 0
-                if tx['version'] > 1:
-                    fee = tx['rct_signatures']['txnFee']
-                else:
-                    ins_total = 0
-                    for k in range(ins):
-                        ins_total += tx['vin'][k]['key']['amount']
-                    outs_total = 0
-                    for k in range(outs):
-                        outs_total += tx['vout'][k]['amount']
-                    fee = ins_total - outs_total
+                ins_total = 0
+                for k in range(ins):
+                    ins_total += tx['vin'][k]['key']['amount']
+                outs_total = 0
+                for k in range(outs):
+                    outs_total += tx['vout'][k]['amount']
+                fee = tx['rct_signatures']['txnFee'] if tx['version'] > 1 else ins_total - outs_total
                 extra_size = len(tx['extra'])
                 if j > 0:
                     txs_str += ','
-                txs_str += "[%d,%d,%d,%d,%d,%d]" % (unlock_time, ins, outs, ring_size, fee, extra_size)
+                txs_str += "[%d,%d,%d,%d,%d,%d,%d]" % (unlock_time, ins, outs, ring_size, fee, extra_size, ins_total)
             print('[%d,%d,%d,%d,%d,%d,[%s]],' % (timestamp, nonce, difficulty, reward, block_size, blob_size, txs_str))
         print(']')
 
