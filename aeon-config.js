@@ -24,6 +24,9 @@ var aeon_config = {
     get_emission_speed_factor: function(target_minutes) {
       return this.EMISSION_SPEED_FACTOR_PER_MINUTE - int_log2(target_minutes);
     },
+    get_blockheader_size(height) {
+      return 43;
+    }
 };
 
 var aeon_offset_1 = {

@@ -14,6 +14,7 @@
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="js/util.js"></script>
 <script src="data/monero-data-10.js"></script>
 <script src="data/monero-data-11.js"></script>
 <script src="data/monero-data-12.js"></script>
@@ -40,7 +41,7 @@ var chart = get_chart([].concat(
     chartData_17,
     chartData_18,
     chartData_19,
-), monero_offset_1);
+), monero_config, monero_offset_1);
 
 function togglePan() {
   chart.chartCursor.pan = document.getElementById("pan").checked;

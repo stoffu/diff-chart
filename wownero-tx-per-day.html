@@ -14,16 +14,18 @@
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="js/util.js"></script>
 <script src="data/wownero-data-0.js"></script>
 <script src="data/wownero-data-1.js"></script>
 <script src="js/tx-per-day.js"></script>
+<script src="wownero-config.js"></script>
 
 <!-- Chart code -->
 <script>
 var chart = get_chart([].concat(
   chartData_0,
   chartData_1
-));
+), wownero_config);
 
 function togglePan() {
   chart.chartCursor.pan = document.getElementById("pan").checked;

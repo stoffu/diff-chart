@@ -11,6 +11,9 @@ var monero_config = {
     get_emission_speed_factor: function(target_minutes) {
       return this.EMISSION_SPEED_FACTOR_PER_MINUTE - (target_minutes - 1);
     },
+    get_blockheader_size(height) {
+      return 43;
+    }
 };
 
 var monero_offset_1 = {
