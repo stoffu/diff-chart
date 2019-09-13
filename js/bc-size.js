@@ -1,4 +1,4 @@
-function get_chart(chartData, offset) {
+function get_chart(chartData, cryptonote_config, offset) {
     if (offset === undefined)
         chartData.shift();
 
@@ -10,6 +10,7 @@ function get_chart(chartData, offset) {
           chartData[i].bc_size += offset.bc_size;
         if (i > 0)
           chartData[i].bc_size += chartData[i - 1].bc_size;
+        chartData[i].bc_size += cryptonote_config.get_blockheader_size(chartData[i].height);
         chartData[i].bc_size_str = formatBytes(chartData[i].bc_size, 3);
     }
 

@@ -18,13 +18,14 @@
 <script src="data/wownero-data-0.js"></script>
 <script src="data/wownero-data-1.js"></script>
 <script src="js/bc-size.js"></script>
+<script src="wownero-config.js"></script>
 
 <!-- Chart code -->
 <script>
 var chart = get_chart([].concat(
   chartData_0,
   chartData_1
-));
+), wownero_config);
 
 function togglePan() {
   chart.chartCursor.pan = document.getElementById("pan").checked;
