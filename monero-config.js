@@ -18,7 +18,8 @@ var monero_config = {
 
 var monero_offset_1 = {
     height: 1000000,
-    supply: bigInt("11319902360375037196"),
-    supply_proj: bigInt("11338799512357636715"),
+    supply: "11319902360375037196",
+    supply_proj: "11338799512357636715",
+    accum_fee: "28065472452232840",
     bc_size: 2630363526,
 };

@@ -3,14 +3,24 @@ function get_chart(chartData, cryptonote_config, offset) {
         chartData[i].date = new Date(1000 * chartData[i][0]);
         chartData[i].height = i + (offset === undefined ? 0 : offset.height);
         chartData[i].coin_supply = bigInt(chartData[i][3]);
+        chartData[i].fee = bigInt(0);
         for (var j = 0; j < chartData[i][6].length; ++j)
-            chartData[i].coin_supply = chartData[i].coin_supply.minus(chartData[i][6][j][4]);   // subtract fees
-        if (i === 0 && offset !== undefined)
-            chartData[i].coin_supply = chartData[i].coin_supply.plus(offset.supply);
+            chartData[i].fee = chartData[i].fee.plus(chartData[i][6][j][4]);
+        chartData[i].coin_supply = chartData[i].coin_supply.minus(chartData[i].fee);
         if (i > 0)
+        {
             chartData[i].coin_supply = chartData[i].coin_supply.plus(chartData[i - 1].coin_supply);
+            chartData[i].fee = chartData[i].fee.plus(chartData[i - 1].fee);
+        }
+        else if (offset !== undefined)
+        {
+            chartData[i].coin_supply = chartData[i].coin_supply.plus(offset.supply);
+            chartData[i].fee = chartData[i].fee.plus(offset.accum_fee);
+        }
         chartData[i].coin_supply_str = print_money(chartData[i].coin_supply, cryptonote_config.CRYPTONOTE_DISPLAY_DECIMAL_POINT);
         chartData[i].coin_supply_real = chartData[i].coin_supply.toJSNumber() / Math.pow(10, cryptonote_config.CRYPTONOTE_DISPLAY_DECIMAL_POINT);
+        chartData[i].fee_str = print_money(chartData[i].fee, cryptonote_config.CRYPTONOTE_DISPLAY_DECIMAL_POINT);
+        chartData[i].fee_real = chartData[i].fee.toJSNumber() / Math.pow(10, cryptonote_config.CRYPTONOTE_DISPLAY_DECIMAL_POINT);
         // projected supply
         var target = cryptonote_config.get_difficulty_target((offset === undefined ? 0 : offset.height) + i);
         var target_minutes = target / 60;
@@ -19,7 +29,7 @@ function get_chart(chartData, cryptonote_config, offset) {
         var base_reward = bigInt(cryptonote_config.MONEY_SUPPLY).minus(already_generated_coins).shiftRight(emission_speed_factor);
         if (base_reward.lesser(cryptonote_config.FINAL_SUBSIDY_PER_MINUTE * target_minutes))
         {
-          base_reward = bigInt(cryptonote_config.FINAL_SUBSIDY_PER_MINUTE * target_minutes);
+            base_reward = bigInt(cryptonote_config.FINAL_SUBSIDY_PER_MINUTE * target_minutes);
         }
         chartData[i].coin_supply_proj = base_reward.plus(already_generated_coins);
         chartData[i].coin_supply_proj_str = print_money(chartData[i].coin_supply_proj, cryptonote_config.CRYPTONOTE_DISPLAY_DECIMAL_POINT);
@@ -37,13 +47,28 @@ function get_chart(chartData, cryptonote_config, offset) {
         "marginTop": 7,
         "dataProvider": chartData,
         "valueAxes": [{
+            "id":"va_supply",
+            "color": "DarkGoldenrod",
+            "axisColor": "DarkGoldenrod",
+            "axisThickness": 2,
             "axisAlpha": 0,
+            "position": "left"
+        }, {
+            "id":"va_fee",
+            "color": "LightSeaGreen",
+            "axisColor": "LightSeaGreen",
+            "axisThickness": 2,
+            "axisAlpha": 0,
+            "gridAlpha": 0,
+            "position": "right"
         }],
         "mouseWheelZoomEnabled": true,
         "graphs": [{
             "id": "g1",
-            "lineColor": "#cc9900",
-            "balloonText": "Supply: <b>[[coin_supply_str]]</b>\n(Proj: [[coin_supply_proj_str]])\nHeight: <b>[[height]]</b>",
+            "valueAxis": "va_supply",
+            "lineColor": "DarkGoldenrod",
+            "lineThickness": 4,
+            "balloonText": "Supply: <b>[[coin_supply_str]]</b>\n(Proj: [[coin_supply_proj_str]])\n(Accum fee: [[fee_str]])\nHeight: <b>[[height]]</b>",
             "bullet": "round",
             "bulletBorderAlpha": 1,
             "bulletColor": "#FFFFFF",
@@ -56,7 +81,9 @@ function get_chart(chartData, cryptonote_config, offset) {
             }
         },{
             "id": "g2",
-            "lineColor": "#447700",
+            "valueAxis": "va_supply",
+            "lineColor": "DarkKhaki",
+            "lineThickness": 2,
             "bullet": "round",
             "bulletBorderAlpha": 1,
             "bulletColor": "#FFFFFF",
@@ -65,7 +92,19 @@ function get_chart(chartData, cryptonote_config, offset) {
             "valueField": "coin_supply_proj_real",
             "useLineColorForBulletBorder": true,
             "showBalloon": false,
-            "hidden": true,
+        },{
+            "id": "g3",
+            "valueAxis": "va_fee",
+            "lineColor": "LightSeaGreen",
+            "lineThickness": 1,
+            "bullet": "round",
+            "bulletBorderAlpha": 1,
+            "bulletColor": "#FFFFFF",
+            "hideBulletsCount": 50,
+            "title": "accumulated fee",
+            "valueField": "fee_real",
+            "useLineColorForBulletBorder": true,
+            "showBalloon": false,
         }],
         "chartScrollbar": {
             "autoGridCount": true,

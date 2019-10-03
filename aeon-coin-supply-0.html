@@ -44,11 +44,6 @@ var chart = get_chart([].concat(
     chartData_9,
     ), aeon_config);
 
-function toggleProj() {
-  chart.graphs[1].hidden = !document.getElementById("proj").checked;
-  chart.validateNow();
-}
-
 function togglePan() {
   chart.chartCursor.pan = document.getElementById("pan").checked;
 }
@@ -58,7 +53,6 @@ function togglePan() {
 <body>
 <h1>Aeon coin supply</h1>
 <div id="chartdiv"></div>
-<p><input type="checkbox" id="proj" onclick="toggleProj()">Show projected supply</p>
 <p><input type="checkbox" id="pan" onclick="togglePan()">Enable panning</p>
 <p><a href="./">Back to top</a></p>
 </body>
