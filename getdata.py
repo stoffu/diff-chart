@@ -91,7 +91,7 @@ class GetData():
                 outs_total = 0
                 for k in range(outs):
                     outs_total += tx['vout'][k]['amount']
-                fee = tx['rct_signatures']['txnFee'] if tx['version'] > 1 else ins_total - outs_total
+                fee = tx['rct_signatures']['txnFee'] if (tx['version'] & 0xff) > 1 else ins_total - outs_total
                 extra_size = len(tx['extra'])
                 if j > 0:
                     txs_str += ','
