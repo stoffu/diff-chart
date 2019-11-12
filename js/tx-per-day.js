@@ -62,15 +62,18 @@ function get_chart(chartData, cryptonote_config, offset) {
             "valueAxis": "va_num",
             "lineColor": "#cc99ff",
             "lineThickness": 2,
-            "balloonText": "Count: <b>[[value]]</b>\nSize: [[tx_size_str]]",
+            "balloonText": "Count: <b>[[value]]</b>",
             "bullet": "round",
             "bulletBorderAlpha": 1,
             "bulletColor": "#FFFFFF",
             "hideBulletsCount": 50,
-            "title": "red line",
+            "title": "count",
             "valueField": "num_txes",
             "useLineColorForBulletBorder": true,
+            // "balloonColor": "white",
             "balloon":{
+                // "adjustBorderColor": false,
+                // "borderColor": "gray",
                 "cornerRadius": 10,
             }
         },{
@@ -78,14 +81,18 @@ function get_chart(chartData, cryptonote_config, offset) {
             "valueAxis": "va_size",
             "lineColor": "#22b681",
             "lineThickness": 1,
-            "showBalloon" : false,
+            "showBalloon" : true,
+            "balloonText": "Size: [[tx_size_str]]",
             "bullet": "round",
             "bulletBorderAlpha": 1,
             "bulletColor": "#FFFFFF",
             "hideBulletsCount": 50,
-            "title": "StdDev",
+            "title": "size",
             "valueField": "tx_size",
             "useLineColorForBulletBorder": true,
+            "balloon":{
+                "cornerRadius": 10,
+            }
         }],
         "chartScrollbar": {
             "autoGridCount": true,
@@ -93,8 +100,7 @@ function get_chart(chartData, cryptonote_config, offset) {
             "scrollbarHeight": 40
         },
         "chartCursor": {
-           "limitToGraph":"g_num",
-           "pan": false
+            "cursorAlpha": 0.25,
         },
         "categoryField": "date",
         "categoryAxis": {
