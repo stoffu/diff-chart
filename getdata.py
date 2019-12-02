@@ -93,9 +93,10 @@ class GetData():
                     outs_total += tx['vout'][k]['amount']
                 fee = tx['rct_signatures']['txnFee'] if (tx['version'] & 0xff) > 1 else ins_total - outs_total
                 extra_size = len(tx['extra'])
+                tx_size = len(res_txs['txs'][j]['as_hex']) / 2
                 if j > 0:
                     txs_str += ','
-                txs_str += "[%d,%d,%d,%d,%d,%d,%d]" % (unlock_time, ins, outs, ring_size, fee, extra_size, ins_total)
+                txs_str += "[%d,%d,%d,%d,%d,%d,%d,%d]" % (unlock_time, ins, outs, ring_size, fee, extra_size, ins_total, tx_size)
             print('[%d,%d,%d,%d,%d,%d,[%s]],' % (timestamp, nonce, difficulty, reward, block_size, blob_size, txs_str))
         print(']')
 

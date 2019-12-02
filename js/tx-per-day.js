@@ -13,21 +13,42 @@ function get_chart(chartData, cryptonote_config, offset) {
             block_date = block_date_new;
             chartData_tpd.push({
                 "date": block_date,
-                "num_txes": 0,
-                "tx_size_sum": 0,
+                "tx_sizes": [],
             });
         }
-        var blk_size = chartData[i][4];
-        var blk_blob_size = chartData[i][5];
         var num_txes = chartData[i][6].length;
-        var height = i + (offset === undefined ? 1 : offset.height);
-        var miner_tx_size =  blk_blob_size - cryptonote_config.get_blockheader_size(height) - num_txes * 32 - 1;
-        chartData_tpd[chartData_tpd.length - 1].num_txes += num_txes;
-        chartData_tpd[chartData_tpd.length - 1].tx_size_sum += blk_size - miner_tx_size;
+        for (var j = 0; j < num_txes; ++j) {
+            var tx_size = chartData[i][6][j][7]
+            chartData_tpd[chartData_tpd.length - 1].tx_sizes.push(tx_size);
+        }
     }
     for (var i = 0; i < chartData_tpd.length; ++i) {
-        chartData_tpd[i].tx_size = chartData_tpd[i].num_txes === 0 ? 1 : (chartData_tpd[i].tx_size_sum / chartData_tpd[i].num_txes);
-        chartData_tpd[i].tx_size_str = formatBytes(chartData_tpd[i].tx_size, 3);
+        var tpd = chartData_tpd[i];
+        tpd.num_txes = tpd.tx_sizes.length;
+        tpd.tx_size_avg = 0;
+        tpd.tx_size_max = 0;
+        tpd.tx_size_min = 100000;
+        tpd.tx_size_var = 0;
+        for (var j = 0; j < tpd.num_txes; ++j) {
+            var tx_size = tpd.tx_sizes[j];
+            tpd.tx_size_avg += tx_size;
+            tpd.tx_size_max = Math.max(tpd.tx_size_max, tx_size);
+            tpd.tx_size_min = Math.min(tpd.tx_size_min, tx_size);
+        }
+        if (tpd.num_txes > 0)
+            tpd.tx_size_avg /= tpd.num_txes;
+        for (var j = 0; j < tpd.num_txes; ++j) {
+            var tx_size = tpd.tx_sizes[j];
+            var d = tx_size - tpd.tx_size_avg;
+            tpd.tx_size_var += d * d;
+        }
+        if (tpd.num_txes > 0)
+            tpd.tx_size_var /= tpd.num_txes;
+        tpd.tx_size_stddev = Math.sqrt(tpd.tx_size_var);
+        tpd.tx_size_avg_str = formatBytes(tpd.tx_size_avg, 3);
+        tpd.tx_size_max_str = formatBytes(tpd.tx_size_max, 3);
+        tpd.tx_size_min_str = formatBytes(tpd.tx_size_min, 3);
+        tpd.tx_size_stddev_str = formatBytes(tpd.tx_size_stddev, 3);
     }
 
     var chart = AmCharts.makeChart("chartdiv", {
@@ -77,22 +98,54 @@ function get_chart(chartData, cryptonote_config, offset) {
                 "cornerRadius": 10,
             }
         },{
-            "id": "g_size",
+            "id": "g_size_avg",
             "valueAxis": "va_size",
             "lineColor": "#22b681",
             "lineThickness": 1,
             "showBalloon" : true,
-            "balloonText": "Size: [[tx_size_str]]",
+            "balloonText":
+                "Size: [[tx_size_avg_str]]<br/>" +
+                "Max: [[tx_size_max_str]]<br/>" +
+                "Min: [[tx_size_min_str]]<br/>" +
+                "StdDev: [[tx_size_stddev_str]]",
             "bullet": "round",
             "bulletBorderAlpha": 1,
             "bulletColor": "#FFFFFF",
             "hideBulletsCount": 50,
             "title": "size",
-            "valueField": "tx_size",
+            "valueField": "tx_size_avg",
             "useLineColorForBulletBorder": true,
             "balloon":{
                 "cornerRadius": 10,
             }
+        },{
+            "id": "g_size_max",
+            "valueAxis": "va_size",
+            "type": "step",
+            "lineColor": "#28d79a",
+            "lineAlpha": 0.5,
+            "showBalloon" : false,
+            "bullet": "round",
+            "bulletBorderAlpha": 1,
+            "bulletColor": "#FFFFFF",
+            "hideBulletsCount": 50,
+            "title": "Max",
+            "valueField": "tx_size_max",
+            "useLineColorForBulletBorder": true,
+        },{
+            "id": "g_size_min",
+            "valueAxis": "va_size",
+            "type": "step",
+            "lineColor": "#18815c",
+            "lineAlpha": 0.5,
+            "showBalloon" : false,
+            "bullet": "round",
+            "bulletBorderAlpha": 1,
+            "bulletColor": "#FFFFFF",
+            "hideBulletsCount": 50,
+            "title": "Min",
+            "valueField": "tx_size_min",
+            "useLineColorForBulletBorder": true,
         }],
         "chartScrollbar": {
             "autoGridCount": true,

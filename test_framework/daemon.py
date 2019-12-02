@@ -83,7 +83,7 @@ class Daemon(object):
         gettransactions = {
             'txs_hashes': tx_hashes,
             'decode_as_json': True,
-            'prune': True
+            'prune': False
         }
         return self.rpc.send_request('/gettransactions', gettransactions)
 
