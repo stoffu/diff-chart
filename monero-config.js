@@ -21,5 +21,13 @@ var monero_offset_1 = {
     supply: "11319902360375037196",
     supply_proj: "11338799512357636715",
     accum_fee: "28065472452232840",
-    bc_size: 2630363526,
+    bc_size: 2673363483,
+};
+
+var monero_offset_2 = {
+    height: 2000000,
+    supply: "17377181853051533808",
+    supply_proj: "17381467531075450577",
+    accum_fee: "94201213460887986",
+    bc_size: 60200955610,
 };

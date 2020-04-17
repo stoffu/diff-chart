@@ -28,7 +28,7 @@ function get_chart(chartData, cryptonote_config, offset) {
         "graphs": [{
             "id": "g1",
             "lineColor": "#07ab82",
-            "balloonText": "Size: [[bc_size_str]]\nHeight: <b>[[height]]</b>",
+            "balloonText": "Size: [[bc_size_str]]\n([[bc_size]] bytes)\nHeight: <b>[[height]]</b>",
             "bullet": "round",
             "bulletBorderAlpha": 1,
             "bulletColor": "#FFFFFF",

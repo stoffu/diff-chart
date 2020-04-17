@@ -1,0 +1,41 @@
+<html>
+<header><title>Monero nonce</title>
+<!-- Styles -->
+<style>
+#chartdiv {
+  width : 100%;
+  height  : 500px;
+}                                 
+</style>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="js/util.js"></script>
+<script src="data/monero-data-20.js"></script>
+<script src="js/nonce.js"></script>
+<script src="monero-config.js"></script>
+
+<!-- Chart code -->
+<script>
+var chart = get_chart([].concat(
+    chartData_20,
+), monero_offset_2);
+
+function togglePan() {
+  chart.chartCursor.pan = document.getElementById("pan").checked;
+}
+
+</script>
+</header>
+<body>
+<h1>Monero nonce</h1>
+<p>Since drawing many points in amCharts is somehow very slow and can make your browser unresponsive, the maximum number of points being drawn is limited to 200000 which is what the initial zoom level shows. For easily viewing the past data, use the "Show all" button to maximally zoom out and then use mouse dragging to select the time period as you wish.</p>
+<div id="chartdiv"></div>
+<p><input type="checkbox" id="pan" onclick="togglePan()">Enable panning</p>
+<p><a href="./">Back to top</a></p>
+</body>
+</html>
