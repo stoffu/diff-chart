@@ -16,6 +16,7 @@
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 <script src="js/util.js"></script>
 <script src="data/monero-data-20.js"></script>
+<script src="data/monero-data-21.js"></script>
 <script src="js/diff.js"></script>
 <script src="monero-config.js"></script>
 
@@ -23,6 +24,7 @@
 <script>
 var chart = get_chart([].concat(
     chartData_20,
+    chartData_21,
 ), monero_config, monero_offset_2);
 
 function toggleLogScale() {
