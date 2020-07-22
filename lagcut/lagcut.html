@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CryptoNote difficulty lag/cut removal tests</title>
+
+    <style>
+    #chartdiv {
+      width : 100%;
+      height  : 500px;
+    }                                 
+    </style>
+
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    
+    <script src="data-lagcut-w.js"></script>
+    <script src="data-lagcut-wo.js"></script>
+    <script>
+      const N = chartData_w.length;
+      var chartData = [];
+      for (var i = 0; i < N; ++i) {
+        var entry = {};
+        entry.height = i;
+        entry.block_time_old = chartData_w[i][0];
+        entry.difficulty_old = chartData_w[i][1];
+        entry.block_time_new = chartData_wo[i][0];
+        entry.difficulty_new = chartData_wo[i][1];
+        chartData.push(entry);
+      }
+      var chart = AmCharts.makeChart("chartdiv", {
+        "type": "serial",
+        "theme": "light",
+        "marginRight": 80,
+        "autoMarginOffset": 20,
+        "marginTop": 7,
+        "dataProvider": chartData,
+        "valueAxes": [{
+          "id":"va_time",
+          "color": "#999",
+          "axisColor": "#999",
+          "axisThickness": 2,
+          "axisAlpha": 0.2,
+          "dashLength": 1,
+          "position": "left",
+        }, {
+          "id":"va_diff",
+          "color": "#333",
+          "axisColor": "#333",
+          "axisThickness": 2,
+          "axisAlpha": 0.2,
+          "dashLength": 1,
+          "position": "left",
+          "gridAlpha": 0,
+          "position": "right"
+        }],
+        "mouseWheelZoomEnabled": true,
+        "graphs": [{
+          "id": "g_block_time_old",
+          "valueAxis": "va_time",
+          "lineColor": "#faa",
+          "lineThickness": 2,
+          "balloonText": "bt (old): <b>[[value]]</b>s",
+          "bullet": "round",
+          "bulletBorderAlpha": 1,
+          "bulletColor": "#FFFFFF",
+          "hideBulletsCount": 50,
+          "title": "Block time (old)",
+          "valueField": "block_time_old",
+          "useLineColorForBulletBorder": true,
+          // "balloonColor": "white",
+          "balloon":{
+            // "adjustBorderColor": false,
+            // "borderColor": "gray",
+            "cornerRadius": 10,
+          }
+        },{
+          "id": "g_difficulty_old",
+          "valueAxis": "va_diff",
+          "lineColor": "#922",
+          "lineThickness": 1,
+          "showBalloon" : true,
+          "balloonText": "d (old): <b>[[value]]</b>",
+          "bullet": "round",
+          "bulletBorderAlpha": 1,
+          "bulletColor": "#FFFFFF",
+          "hideBulletsCount": 50,
+          "title": "Difficulty (old)",
+          "valueField": "difficulty_old",
+          "useLineColorForBulletBorder": true,
+          "balloon":{
+            "cornerRadius": 10,
+          }
+        },{
+          "id": "g_block_time_new",
+          "valueAxis": "va_time",
+          "lineColor": "#aaf",
+          "lineThickness": 2,
+          "balloonText": "bt (new): <b>[[value]]</b>s",
+          "bullet": "round",
+          "bulletBorderAlpha": 1,
+          "bulletColor": "#FFFFFF",
+          "hideBulletsCount": 50,
+          "title": "Block time (new)",
+          "valueField": "block_time_new",
+          "useLineColorForBulletBorder": true,
+          // "balloonColor": "white",
+          "balloon":{
+            // "adjustBorderColor": false,
+            // "borderColor": "gray",
+            "cornerRadius": 10,
+          }
+        },{
+          "id": "g_difficulty_new",
+          "valueAxis": "va_diff",
+          "lineColor": "#229",
+          "lineThickness": 1,
+          "showBalloon" : true,
+          "balloonText": "d (new): <b>[[value]]</b>",
+          "bullet": "round",
+          "bulletBorderAlpha": 1,
+          "bulletColor": "#FFFFFF",
+          "hideBulletsCount": 50,
+          "title": "Difficulty (new)",
+          "valueField": "difficulty_new",
+          "useLineColorForBulletBorder": true,
+          "balloon":{
+            "cornerRadius": 10,
+          }
+        }],
+        "chartCursor": {
+          "cursorAlpha": 0.25,
+        },
+        "categoryField": "height",
+        "categoryAxis": {
+          "parseDates": false,
+          "axisColor": "#DADADA",
+          "dashLength": 1,
+          "minorGridEnabled": true
+        },
+        "export": {
+          "enabled": true
+        }
+      });
+      console.log(chart);
+
+      // this method is called when chart is first inited as we listen for "rendered" event
+      function zoomChart() {
+        // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
+        chart.zoomToIndexes(0, chartData.length - 1);
+      }
+      chart.addListener("rendered", zoomChart);
+      zoomChart();
+
+      function togglePan() {
+        chart.chartCursor.pan = document.getElementById("pan").checked;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>CryptoNote difficulty lag/cut removal tests</h1>
+    <div id="chartdiv"></div>
+    <p><input type="checkbox" id="pan" onclick="togglePan()">Enable panning</p>
+  </body>
+</html>
