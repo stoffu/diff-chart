@@ -22,8 +22,17 @@
     <script src="data-v1.js"></script>
     <script src="data-v9.js"></script>
     <script>
+      function getMean(values) {
+        var total = 0;
+        for (var i = 0; i < values.length; ++i)
+          total += values[i];
+        return (total / values.length).toFixed(2);
+      }
       const N = chartData_v1.length;
       var chartData = [];
+      var avg_window_v1 = [];
+      var avg_window_v9 = [];
+      const WINDOW_SIZE = 90;
       for (var i = 0; i < N; ++i) {
         var entry = {};
         entry.height = i;
@@ -31,6 +40,14 @@
         entry.difficulty_v1 = chartData_v1[i][1];
         entry.block_time_v9 = chartData_v9[i][0];
         entry.difficulty_v9 = chartData_v9[i][1];
+        if (avg_window_v1.length == WINDOW_SIZE) {
+          avg_window_v1.shift();
+          avg_window_v9.shift();
+        }
+        avg_window_v1.push(entry.block_time_v1);
+        avg_window_v9.push(entry.block_time_v9);
+        entry.block_time_avg_v1 = getMean(avg_window_v1);
+        entry.block_time_avg_v9 = getMean(avg_window_v9);
         chartData.push(entry);
       }
       var chart = AmCharts.makeChart("chartdiv", {
@@ -63,7 +80,8 @@
         "graphs": [{
           "id": "g_block_time_v1",
           "valueAxis": "va_time",
-          "lineColor": "#faa",
+          "lineColor": "#fcc",
+          "lineAlpha": 0.5,
           "lineThickness": 2,
           "balloonText": "blktime (v1): <b>[[value]]</b>s",
           "bullet": "round",
@@ -72,6 +90,26 @@
           "hideBulletsCount": 50,
           "title": "Block time (v1)",
           "valueField": "block_time_v1",
+          "useLineColorForBulletBorder": true,
+          // "balloonColor": "white",
+          "balloon":{
+            // "adjustBorderColor": false,
+            // "borderColor": "gray",
+            "cornerRadius": 10,
+          }
+        },{
+          "id": "g_block_time_avg_v1",
+          "type": "smoothedLine",
+          "valueAxis": "va_time",
+          "lineColor": "#faa",
+          "lineThickness": 5,
+          "balloonText": "blktime 6h avg (v1): <b>[[value]]</b>s",
+          "bullet": "round",
+          "bulletBorderAlpha": 1,
+          "bulletColor": "#FFFFFF",
+          "hideBulletsCount": 50,
+          "title": "Block time 6h average (v1)",
+          "valueField": "block_time_avg_v1",
           "useLineColorForBulletBorder": true,
           // "balloonColor": "white",
           "balloon":{
@@ -99,7 +137,8 @@
         },{
           "id": "g_block_time_v9",
           "valueAxis": "va_time",
-          "lineColor": "#aaf",
+          "lineColor": "#ccf",
+          "lineAlpha": 0.5,
           "lineThickness": 2,
           "balloonText": "blktime (v9): <b>[[value]]</b>s",
           "bullet": "round",
@@ -108,6 +147,26 @@
           "hideBulletsCount": 50,
           "title": "Block time (v9)",
           "valueField": "block_time_v9",
+          "useLineColorForBulletBorder": true,
+          // "balloonColor": "white",
+          "balloon":{
+            // "adjustBorderColor": false,
+            // "borderColor": "gray",
+            "cornerRadius": 10,
+          }
+        },{
+          "id": "g_block_time_avg_v9",
+          "type": "smoothedLine",
+          "valueAxis": "va_time",
+          "lineColor": "#aaf",
+          "lineThickness": 5,
+          "balloonText": "blktime 6h avg (v9): <b>[[value]]</b>s",
+          "bullet": "round",
+          "bulletBorderAlpha": 1,
+          "bulletColor": "#FFFFFF",
+          "hideBulletsCount": 50,
+          "title": "Block time 6h average (v9)",
+          "valueField": "block_time_avg_v9",
           "useLineColorForBulletBorder": true,
           // "balloonColor": "white",
           "balloon":{
