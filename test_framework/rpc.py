@@ -41,7 +41,7 @@ class JSONRPC(object):
             url,
             data=json.dumps(inputs),
             headers={'content-type': 'application/json'},
-            timeout=10)
+            timeout=600)
         res = res.json()
         
         assert 'error' not in res, res
