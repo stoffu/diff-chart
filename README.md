@@ -16,6 +16,7 @@ _These JavaScript-based interactive charts are highly memory intensive. You will
 - [Block time](https://stoffu.github.io/diff-chart/aeon-block-time-1.html) ([0](https://stoffu.github.io/diff-chart/aeon-block-time-0.html))
 - [Nonce](https://stoffu.github.io/diff-chart/aeon-nonce-1.html) ([0](https://stoffu.github.io/diff-chart/aeon-nonce-0.html))
 - [Amount](https://stoffu.github.io/diff-chart/aeon-amount-1.html) ([0](https://stoffu.github.io/diff-chart/aeon-amount-0.html))
+- [Dormant Supply](https://yorha-0x.github.io/dormant-aeon/)
 
 ## Monero
 
