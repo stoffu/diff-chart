@@ -58,6 +58,7 @@ class GetData():
         assert start_height < end_height
         print('var chartData_%d = [' % height_window_index)
         for i in range(start_height, end_height):
+            if i > start_height and i % 1000 == 0: print("processed height:", i, file=sys.stderr)
             while True:
                 try:
                     res_blk = daemon.getblock(i)
