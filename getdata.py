@@ -43,6 +43,8 @@ import sys
 import datetime
 import json
 import requests
+import urllib3
+import time
 
 class GetData():
     def run(self, port, height_window_index):
@@ -60,7 +62,10 @@ class GetData():
                 try:
                     res_blk = daemon.getblock(i)
                     break
-                except requests.exceptions.RequestException as e:
+                except (Exception, OSError, requests.exceptions.ConnectionError, urllib3.exceptions.MaxRetryError, urllib3.exceptions.NewConnectionError) as e:
+                    print('daemon.getblock() at height', i, ", error", e, file=sys.stderr)
+                    print('Sleeping for a second', file=sys.stderr)
+                    time.sleep(1)
                     continue
 
             block_header = res_blk['block_header']
@@ -76,7 +81,15 @@ class GetData():
             # print(res_blk)
             # print('====================================================')
 
-            res_txs = daemon.gettransactions(res_blk['tx_hashes']) if num_txes > 0 else None
+            while True:
+                try:
+                    res_txs = daemon.gettransactions(res_blk['tx_hashes']) if num_txes > 0 else None
+                    break
+                except (Exception, OSError, requests.exceptions.ConnectionError, urllib3.exceptions.MaxRetryError, urllib3.exceptions.NewConnectionError) as e:
+                    print('daemon.gettransactions() at height', i, ", error", e, file=sys.stderr)
+                    print('Sleeping for a second', file=sys.stderr)
+                    time.sleep(1)
+                    continue
             txs_str = ''
             for j in range(num_txes):
                 tx_json = res_txs['txs'][j]['as_json']
