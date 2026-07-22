@@ -6,16 +6,16 @@ _These JavaScript-based interactive charts are highly memory intensive. You will
 
 ## Aeon
 
-- [Difficulty](https://stoffu.github.io/diff-chart/aeon-1.html) ([0](https://stoffu.github.io/diff-chart/aeon-0.html))
-- [Transactions per day](https://stoffu.github.io/diff-chart/aeon-tx-per-day-1.html) ([0](https://stoffu.github.io/diff-chart/aeon-tx-per-day-0.html))
-- [Ring sizes](https://stoffu.github.io/diff-chart/aeon-ring-size-1.html) ([0](https://stoffu.github.io/diff-chart/aeon-ring-size-0.html))
-- [Block size](https://stoffu.github.io/diff-chart/aeon-block-size-1.html) ([0](https://stoffu.github.io/diff-chart/aeon-block-size-0.html))
-- [Blockchain size](https://stoffu.github.io/diff-chart/aeon-bc-size-1.html) ([0](https://stoffu.github.io/diff-chart/aeon-bc-size-0.html))
-- [Block reward](https://stoffu.github.io/diff-chart/aeon-block-reward-1.html) ([0](https://stoffu.github.io/diff-chart/aeon-block-reward-0.html))
-- [Coin supply](https://stoffu.github.io/diff-chart/aeon-coin-supply-1.html) ([0](https://stoffu.github.io/diff-chart/aeon-coin-supply-0.html))
-- [Block time](https://stoffu.github.io/diff-chart/aeon-block-time-1.html) ([0](https://stoffu.github.io/diff-chart/aeon-block-time-0.html))
-- [Nonce](https://stoffu.github.io/diff-chart/aeon-nonce-1.html) ([0](https://stoffu.github.io/diff-chart/aeon-nonce-0.html))
-- [Amount](https://stoffu.github.io/diff-chart/aeon-amount-1.html) ([0](https://stoffu.github.io/diff-chart/aeon-amount-0.html))
+- [Difficulty](https://stoffu.github.io/diff-chart/aeon-2.html) ([0](https://stoffu.github.io/diff-chart/aeon-0.html)) ([1](https://stoffu.github.io/diff-chart/aeon-1.html))
+- [Transactions per day](https://stoffu.github.io/diff-chart/aeon-tx-per-day-2.html) ([0](https://stoffu.github.io/diff-chart/aeon-tx-per-day-0.html)) ([1](https://stoffu.github.io/diff-chart/aeon-tx-per-day-1.html))
+- [Ring sizes](https://stoffu.github.io/diff-chart/aeon-ring-size-2.html) ([0](https://stoffu.github.io/diff-chart/aeon-ring-size-0.html)) ([1](https://stoffu.github.io/diff-chart/aeon-ring-size-1.html))
+- [Block size](https://stoffu.github.io/diff-chart/aeon-block-size-2.html) ([0](https://stoffu.github.io/diff-chart/aeon-block-size-0.html)) ([1](https://stoffu.github.io/diff-chart/aeon-block-size-1.html))
+- [Blockchain size](https://stoffu.github.io/diff-chart/aeon-bc-size-2.html) ([0](https://stoffu.github.io/diff-chart/aeon-bc-size-0.html)) ([1](https://stoffu.github.io/diff-chart/aeon-bc-size-1.html))
+- [Block reward](https://stoffu.github.io/diff-chart/aeon-block-reward-2.html) ([0](https://stoffu.github.io/diff-chart/aeon-block-reward-0.html)) ([1](https://stoffu.github.io/diff-chart/aeon-block-reward-1.html))
+- [Coin supply](https://stoffu.github.io/diff-chart/aeon-coin-supply-2.html) ([0](https://stoffu.github.io/diff-chart/aeon-coin-supply-0.html)) ([1](https://stoffu.github.io/diff-chart/aeon-coin-supply-1.html))
+- [Block time](https://stoffu.github.io/diff-chart/aeon-block-time-2.html) ([0](https://stoffu.github.io/diff-chart/aeon-block-time-0.html)) ([1](https://stoffu.github.io/diff-chart/aeon-block-time-1.html))
+- [Nonce](https://stoffu.github.io/diff-chart/aeon-nonce-2.html) ([0](https://stoffu.github.io/diff-chart/aeon-nonce-0.html)) ([1](https://stoffu.github.io/diff-chart/aeon-nonce-1.html))
+- [Amount](https://stoffu.github.io/diff-chart/aeon-amount-2html) ([0](https://stoffu.github.io/diff-chart/aeon-amount-0.html)) ([1](https://stoffu.github.io/diff-chart/aeon-amount-1.html))
 
 ## Monero
 
