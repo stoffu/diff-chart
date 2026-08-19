@@ -36,3 +36,11 @@ var aeon_offset_1 = {
     accum_fee: "8090111859795393",
     bc_size: 2788344945,
 };
+
+var aeon_offset_2 = {
+    height: 2000000,
+    supply: "18718018.823913369984",
+    supply_proj: "18718613.071987775199",
+    accum_fee: "12047.645235642468",
+    bc_size: 5263655129,
+};
